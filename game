@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fincantieri - Simulatore Navale Muggiano</title>
+    <style>
+        :root {
+            --primary-color: #1e3c72;
+            --secondary-color: #2a5298;
+            --accent-color: #e74c3c;
+            --light-accent-color: #fdd8d2;
+            --text-color: #333;
+            --light-text-color: #f0f0f0;
+            --bg-color: #f4f7f6;
+            --card-bg: white;
+            --success-color: #27ae60;
+            --error-color: #c0392b;
+            --warning-color: #f39c12;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--light-text-color);
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        main {
+            padding: 20px 0;
+        }
+
+        .game-section {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+        }
+
+        .game-section h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+        }
+        .game-section h2 .icon {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+
+        .button, button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .button:hover, button:hover {
+            background-color: #c0392b; /* Darker accent */
+            transform: translateY(-2px);
+        }
+        
+        .button:disabled, button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .info-panel {
+            background-color: #e9f5ff;
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .info-panel p {
+            margin-bottom: 5px;
+        }
+        .info-panel strong {
+            color: var(--primary-color);
+        }
+        .days-remaining.negative {
+            color: var(--error-color);
+            font-weight: bold;
+        }
+
+
+        .task-list li, .resource-list li {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            border: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task-status {
+            font-style: italic;
+            font-size: 0.9em;
+        }
+        .task-status.completed {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+         .task-status.in-progress {
+            color: var(--warning-color);
+        }
+
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background-color: var(--success-color);
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-size: 0.8rem;
+            transition: width 0.5s ease;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 600px;
+            text-align: left; /* Changed for pagella */
+        }
+        .modal-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .modal-content p {
+            margin-bottom: 10px; /* Adjusted for pagella */
+        }
+        .pagella-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .pagella-item:last-child {
+            border-bottom: none;
+        }
+        .pagella-item strong {
+            color: var(--secondary-color);
+        }
+        .final-grade {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        .bacino-view {
+            width: 100%;
+            height: 250px;
+            background-color: #d0e0f0; /* Light blue for water/bacino */
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ship-visual {
+            width: 70%; /* Increased width */
+            height: 50%; /* Increased height */
+            border: none; /* Removed border for blocks to form hull */
+            position: relative;
+            display: flex;
+            flex-direction: column-reverse; /* Build from bottom up */
+            align-items: center;
+        }
+        .ship-block {
+            background-color: #7f8c8d; /* Hull color */
+            border: 1px solid #5d6d7e; /* Darker border for definition */
+            margin-bottom: -1px; /* Overlap borders slightly */
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7em;
+        }
+        .ship-block.visible {
+            opacity: 1;
+        }
+        #block-1-visual { width: 80%; height: 25%; border-radius: 5px 5px 0 0;}
+        #block-2-visual { width: 85%; height: 25%; }
+        #block-3-visual { width: 90%; height: 25%; border-radius: 0 0 10px 10px; } /* Base of hull */
+        #block-4-visual { /* Poppa */
+            width: 50%; height: 20%; 
+            position: absolute; 
+            bottom: 25%; /* On top of block-3 */
+            left: 5%;
+            background-color: #95a5a6;
+        }
+         #block-prua-visual { /* Prua */
+            width: 50%; height: 20%; 
+            position: absolute; 
+            bottom: 25%; /* On top of block-3 */
+            right: 5%;
+            background-color: #95a5a6; /* Slightly lighter for prua */
+        }
+
+        .ship-block.flipped-visual {
+             transform: rotateX(180deg) translateY(50%); /* Visual cue for flipped */
+             background-color: #adb5bd; /* Lighter when flipped */
+             z-index: 5; /* Ensure it's visible if overlapping */
+        }
+        .ship-superstructure-visual {
+            width: 40%;
+            height: 30%;
+            background-color: #bdc3c7;
+            position: absolute;
+            bottom: 50%; /* On top of hull base */
+            border: 1px solid #95a5a6;
+            border-radius: 5px 5px 0 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 10;
+        }
+         .ship-superstructure-visual.visible {
+            opacity: 1;
+        }
+
+        /* Sagomatura Mini-Game Styles */
+        #sagomatura-minigame {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #ced4da;
+        }
+        #lamiera-visual {
+            width: 300px;
+            height: 150px;
+            background-color: #adb5bd; /* Metal sheet color */
+            margin: 15px auto;
+            position: relative;
+            border: 2px solid #6c757d;
+        }
+        .cut-target {
+            position: absolute;
+            background-color: rgba(231, 76, 60, 0.7); /* Accent color, semi-transparent */
+            cursor: pointer;
+            border: 1px dashed white;
+            transition: background-color 0.2s;
+        }
+        .cut-target:hover {
+            background-color: rgba(192, 57, 43, 0.9);
+        }
+        .cut-target.cut {
+            background-color: rgba(39, 174, 96, 0.7); /* Success color */
+            pointer-events: none; /* No more clicks after cut */
+        }
+        #minigame-status {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+
+        .resource-item, .decision-item {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .resource-item label, .decision-item label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .resource-item input[type="number"], .decision-item select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            border-bottom: 3px solid transparent;
+            font-size: 1rem;
+            color: var(--secondary-color);
+        }
+        .tab-button.active {
+            border-bottom: 3px solid var(--accent-color);
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+
+        footer {
+            background: var(--primary-color);
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: auto; /* Pushes footer to bottom */
+        }
+        footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .game-section h2 {
+                font-size: 1.5rem;
+            }
+            .button, button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+            .tabs {
+                flex-wrap: wrap;
+            }
+            .tab-button {
+                font-size: 0.9rem;
+                padding: 8px 10px;
+            }
+            #lamiera-visual {
+                width: 100%;
+                max-width: 250px;
+                height: 125px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Simulatore Navale Muggiano</h1>
+        <p>Gestisci la costruzione di una fregata militare!</p>
+    </header>
+
+    <div class="app-container">
+        <main>
+            <div id="game-area">
+                <!-- Contract Section -->
+                <section id="contract-section" class="game-section">
+                    <h2><span class="icon">📄</span> Contratto Nave</h2>
+                    <div class="info-panel">
+                        <p><strong>Tipo Nave:</strong> Fregata Classe "Vento Forte"</p>
+                        <p><strong>Cliente:</strong> Marina Nazionale</p>
+                        <p><strong>Budget Assegnato:</strong> <span id="budget-display">10,000,000</span> Crediti</p>
+                        <p><strong>Scadenza:</strong> <span id="deadline-display">365</span> Giorni</p>
+                        <p><strong>Tempo Trascorso:</strong> <span id="time-elapsed-display">0</span> Giorni</p>
+                    </div>
+                    <button id="accept-contract-btn">Accetta Contratto e Inizia</button>
+                </section>
+
+                <!-- Game Dashboard (hidden initially) -->
+                <section id="dashboard-section" class="game-section" style="display: none;">
+                    <h2><span class="icon">📊</span> Pannello di Controllo</h2>
+                    <div class="info-panel">
+                        <p><strong>Fase Corrente:</strong> <span id="current-phase-display">N/D</span></p>
+                        <p><strong>Progresso Generale:</strong></p>
+                        <div class="progress-bar-container">
+                            <div id="overall-progress-bar" class="progress-bar">0%</div>
+                        </div>
+                        <p><strong>Budget Rimanente:</strong> <span id="remaining-budget-display"></span> Crediti</p>
+                        <p><strong>Qualità Nave (stimata):</strong> <span id="ship-quality-display">70%</span></p>
+                         <p><strong>Giorni Rimanenti:</strong> <span id="days-remaining-display" class="days-remaining"></span></p>
+                    </div>
+                </section>
+
+                <!-- Main Game Tabs (hidden initially) -->
+                <section id="game-tabs-section" class="game-section" style="display: none;">
+                    <div class="tabs">
+                        <button class="tab-button active" data-tab="planning-tab">Pianificazione</button>
+                        <button class="tab-button" data-tab="procurement-tab">Approvvigionamento</button>
+                        <button class="tab-button" data-tab="hull-tab">Costruzione Scafo</button>
+                        <button class="tab-button" data-tab="outfitting-tab">Allestimento</button>
+                        <button class="tab-button" data-tab="trials-tab">Prove in Mare</button>
+                    </div>
+
+                    <!-- Planning Tab -->
+                    <div id="planning-tab" class="tab-content active">
+                        <h3><span class="icon">📐</span> Progettazione e Pianificazione</h3>
+                        <p>Alloca il budget iniziale per le macro-aree della fregata. Le tue scelte influenzeranno la qualità e i costi successivi.</p>
+                        <div class="decision-item">
+                            <label for="propulsion-budget">Budget Propulsione (Motori Fincantieri):</label>
+                            <input type="number" id="propulsion-budget" value="20" min="10" max="40"> % del budget totale
+                        </div>
+                        <div class="decision-item">
+                            <label for="combat-systems-budget">Budget Sistemi di Combattimento:</label>
+                            <input type="number" id="combat-systems-budget" value="25" min="15" max="45"> % del budget totale
+                        </div>
+                        <div class="decision-item">
+                            <label for="hull-materials-budget">Budget Materiali Scafo:</label>
+                            <input type="number" id="hull-materials-budget" value="15" min="10" max="30"> % del budget totale
+                        </div>
+                        <button id="confirm-planning-btn">Conferma Pianificazione</button>
+                        <div class="info-panel" id="planning-feedback" style="display:none;"></div>
+                    </div>
+
+                    <!-- Procurement Tab -->
+                    <div id="procurement-tab" class="tab-content">
+                        <h3><span class="icon">🛒</span> Ufficio Acquisti</h3>
+                        <p>Ordina i materiali necessari. Fai attenzione ai costi e ai tempi di consegna.</p>
+                        <ul id="material-list" class="resource-list">
+                            <!-- Materials will be populated by JS -->
+                        </ul>
+                        <button id="order-materials-btn" disabled>Ordina Materiali Selezionati</button>
+                        <div class="info-panel" id="procurement-feedback" style="display:none;"></div>
+                    </div>
+
+                    <!-- Hull Construction Tab -->
+                    <div id="hull-tab" class="tab-content">
+                        <h3><span class="icon">⚓</span> Costruzione Scafo nel Bacino</h3>
+                        <p>Gestisci la sagomatura del ferro e l'assemblaggio dei blocchi navali.</p>
+                        <div class="bacino-view">
+                            <div class="ship-visual" id="ship-hull-visual">
+                                <!-- Visual blocks will be dynamically added/styled by JS -->
+                                <div class="ship-block" id="block-3-visual">Blocco Base</div>
+                                <div class="ship-block" id="block-prua-visual">Prua</div>
+                                <div class="ship-block" id="block-4-visual">Poppa</div>
+                                <div class="ship-block" id="block-2-visual">Blocco Centrale</div>
+                                <div class="ship-block" id="block-1-visual">Blocco Sup. (Capovolto)</div>
+                                <div class="ship-superstructure-visual" id="ship-superstructure-visual"></div>
+                            </div>
+                        </div>
+                        <!-- Sagomatura Lamiere Mini-Game Area -->
+                        <div id="sagomatura-minigame" style="display:none;">
+                            <h4>Mini-Gioco: Sagomatura Lamiere</h4>
+                            <p>Clicca sulle aree evidenziate per "tagliare" la lamiera. Completa tutti i tagli!</p>
+                            <div id="lamiera-visual">
+                                <!-- Cut targets will be added by JS -->
+                            </div>
+                            <p id="minigame-status">Tagli rimanenti: <span id="cuts-remaining">0</span></p>
+                            <button id="confirm-cuts-btn" style="display:none;">Conferma Tagli</button>
+                        </div>
+                        <h4>Compiti Scafo:</h4>
+                        <ul id="hull-tasks" class="task-list">
+                           <li>Sagomatura Lamiere <button class="task-btn" data-task="shape_iron">Avvia</button> <span class="task-status"></span></li>
+                           <li>Assembla Blocco 1 (Capovolto) <button class="task-btn" data-task="assemble_block_1">Avvia</button> <span class="task-status"></span></li>
+                           <li>Assembla Blocco 2 <button class="task-btn" data-task="assemble_block_2">Avvia</button> <span class="task-status"></span></li>
+                           <li>Capovolgi e Unisci Blocchi <button class="task-btn" data-task="flip_blocks">Avvia</button> <span class="task-status"></span></li>
+                           <li>Assembla Blocco 3 (Prua) <button class="task-btn" data-task="assemble_block_prua">Avvia</button> <span class="task-status"></span></li>
+                           <li>Assembla Blocco 4 (Poppa) <button class="task-btn" data-task="assemble_block_poppa">Avvia</button> <span class="task-status"></span></li>
+                        </ul>
+                         <div class="info-panel" id="hull-feedback" style="display:none;"></div>
+                    </div>
+                    
+                    <!-- Outfitting Tab -->
+                    <div id="outfitting-tab" class="tab-content">
+                        <h3><span class="icon">🔧</span> Allestimento Strutture</h3>
+                        <p>Coordina le officine specializzate per installare tutti i sistemi.</p>
+                        <h4>Officine:</h4>
+                        <ul id="outfitting-tasks" class="task-list">
+                            <li>Impianti Elettrici <button class="task-btn" data-task="electrical">Avvia</button> <span class="task-status"></span></li>
+                            <li>Sistemi di Condizionamento (HVAC) <button class="task-btn" data-task="hvac">Avvia</button> <span class="task-status"></span></li>
+                            <li>Installazione Motori <button class="task-btn" data-task="engines">Avvia</button> <span class="task-status"></span></li>
+                            <li>Arredamenti Interni <button class="task-btn" data-task="furnishing">Avvia</button> <span class="task-status"></span></li>
+                            <li>Installazione Sistemi di Combattimento <button class="task-btn" data-task="combat_systems">Avvia</button> <span class="task-status"></span></li>
+                        </ul>
+                        <div id="safety-inspection-event" style="display:none; margin-top:15px; padding:10px; background-color: var(--light-accent-color); border-radius:5px;">
+                            <p><strong>Evento: Ispezione di Sicurezza!</strong> Assicurati che i lavoratori indossino DPI.</p>
+                            <button id="pass-inspection-btn">Conferma DPI (Costo: 500 Crediti, 2gg)</button>
+                        </div>
+                        <div class="info-panel" id="outfitting-feedback" style="display:none;"></div>
+                    </div>
+
+                    <!-- Sea Trials Tab -->
+                    <div id="trials-tab" class="tab-content">
+                        <h3><span class="icon">🌊</span> Prove in Mare e Consegna</h3>
+                        <p>Verifica le prestazioni della nave e preparala per la consegna.</p>
+                        <div class="info-panel">
+                            <p><strong>Stabilità (Archimede):</strong> <span id="stability-status">Da Verificare</span></p>
+                            <p>La prua è stata progettata per essere più leggera, contribuendo alla stabilità.</p>
+                        </div>
+                        <h4>Test da Eseguire (Lunghezza percorso: 150m):</h4>
+                        <ul id="trial-tasks" class="task-list">
+                           <li>Test Propulsione <button class="task-btn" data-task="propulsion_trial">Avvia</button> <span class="task-status"></span></li>
+                           <li>Test Manovrabilità <button class="task-btn" data-task="maneuver_trial">Avvia</button> <span class="task-status"></span></li>
+                           <li>Test Sistemi di Bordo <button class="task-btn" data-task="systems_trial">Avvia</button> <span class="task-status"></span></li>
+                        </ul>
+                        <button id="deliver-ship-btn" disabled>Consegna Nave al Cliente</button>
+                        <div class="info-panel" id="trials-feedback" style="display:none;"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Game Over Modal -->
+            <div id="game-over-modal" class="modal">
+                <div class="modal-content">
+                    <h3 id="game-over-title">Simulazione Terminata!</h3>
+                    <p id="game-over-message"></p>
+                    <h4>Pagella Finale:</h4>
+                    <div class="pagella-item"><span>Rispetto Tempi:</span> <span id="final-time-factor">N/D</span></div>
+                    <div class="pagella-item"><span>Qualità Nave:</span> <span id="final-quality-factor">N/D</span></div>
+                    <div class="pagella-item"><span>Gestione Budget:</span> <span id="final-budget-factor">N/D</span></div>
+                    <div class="final-grade">Valutazione: <span id="final-grade-value">N/D</span> / 10</div>
+                    <hr style="margin: 15px 0;">
+                    <p><strong>Punteggio Qualità Finale (Registri Navali):</strong> <span id="final-quality-score"></span>%</p>
+                    <p><strong>Tempo Totale Impiegato:</strong> <span id="final-time-taken"></span> Giorni</p>
+                    <p><strong>Budget Finale:</strong> <span id="final-budget-status"></span></p>
+                    <button id="restart-game-btn">Ricomincia Simulazione</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Simulatore Navale Fincantieri. Un gioco educativo.</p>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Game State Variables
+        let gameState = {}; // Will be initialized by initGame
+
+        // --- Constants for Colors (from CSS variables) ---
+        const COLORS = {
+            primary: '#1e3c72',
+            secondary: '#2a5298',
+            accent: '#e74c3c',
+            success: '#27ae60',
+            error: '#c0392b',
+            text: '#333'
+        };
+
+        // UI Elements (cached for performance)
+        const ui = {
+            budgetDisplay: document.getElementById('budget-display'),
+            deadlineDisplay: document.getElementById('deadline-display'),
+            timeElapsedDisplay: document.getElementById('time-elapsed-display'),
+            remainingBudgetDisplay: document.getElementById('remaining-budget-display'),
+            daysRemainingDisplay: document.getElementById('days-remaining-display'),
+            shipQualityDisplay: document.getElementById('ship-quality-display'),
+            currentPhaseDisplay: document.getElementById('current-phase-display'),
+            overallProgressBar: document.getElementById('overall-progress-bar'),
+            contractSection: document.getElementById('contract-section'),
+            dashboardSection: document.getElementById('dashboard-section'),
+            gameTabsSection: document.getElementById('game-tabs-section'),
+            acceptContractBtn: document.getElementById('accept-contract-btn'),
+            confirmPlanningBtn: document.getElementById('confirm-planning-btn'),
+            planningFeedback: document.getElementById('planning-feedback'),
+            materialListUI: document.getElementById('material-list'),
+            orderMaterialsBtn: document.getElementById('order-materials-btn'),
+            procurementFeedback: document.getElementById('procurement-feedback'),
+            hullTasksUI: document.getElementById('hull-tasks'),
+            shipHullVisual: {
+                main: document.getElementById('ship-hull-visual'),
+                block1: document.getElementById('block-1-visual'),
+                block2: document.getElementById('block-2-visual'),
+                blockPrua: document.getElementById('block-prua-visual'), // Corrected ID
+                blockPoppa: document.getElementById('block-4-visual'), // Corrected ID
+                blockBase: document.getElementById('block-3-visual'), // Corrected ID for base
+                superstructure: document.getElementById('ship-superstructure-visual')
+            },
+            hullFeedback: document.getElementById('hull-feedback'),
+            sagomaturaMinigame: document.getElementById('sagomatura-minigame'),
+            lamieraVisual: document.getElementById('lamiera-visual'),
+            cutsRemainingDisplay: document.getElementById('cuts-remaining'),
+            confirmCutsBtn: document.getElementById('confirm-cuts-btn'),
+            outfittingTasksUI: document.getElementById('outfitting-tasks'),
+            safetyInspectionEventUI: document.getElementById('safety-inspection-event'),
+            passInspectionBtn: document.getElementById('pass-inspection-btn'),
+            outfittingFeedback: document.getElementById('outfitting-feedback'),
+            trialTasksUI: document.getElementById('trial-tasks'),
+            stabilityStatusDisplay: document.getElementById('stability-status'),
+            deliverShipBtn: document.getElementById('deliver-ship-btn'),
+            trialsFeedback: document.getElementById('trials-feedback'),
+            gameOverModal: document.getElementById('game-over-modal'),
+            gameOverTitle: document.getElementById('game-over-title'),
+            gameOverMessage: document.getElementById('game-over-message'),
+            finalTimeFactor: document.getElementById('final-time-factor'),
+            finalQualityFactor: document.getElementById('final-quality-factor'),
+            finalBudgetFactor: document.getElementById('final-budget-factor'),
+            finalGradeValue: document.getElementById('final-grade-value'),
+            finalQualityScore: document.getElementById('final-quality-score'),
+            finalTimeTaken: document.getElementById('final-time-taken'),
+            finalBudgetStatus: document.getElementById('final-budget-status'),
+            restartGameBtn: document.getElementById('restart-game-btn'),
+            tabs: document.querySelectorAll('.tab-button'),
+            tabContents: document.querySelectorAll('.tab-content')
+        };
+        
+        // --- SAGOMATURA MINI-GAME STATE ---
+        let sagomaturaState = {
+            totalCuts: 5,
+            cutsMade: 0,
+            active: false,
+            targets: []
+        };
+
+        // Initialize Game
+        function initGame() {
+            gameState = { 
+                budget: 10000000,
+                initialBudget: 10000000,
+                deadline: 365,
+                timeElapsed: 0,
+                currentPhase: 'Contratto',
+                overallProgress: 0,
+                shipQuality: 70,
+                phases: {
+                    planning: { complete: false, budgetAllocated: {} },
+                    procurement: { complete: false, materialsOrdered: false, cost: 0, materialsArrived:false },
+                    hull: { complete: false, tasks: {
+                        shape_iron: {name: "Sagomatura Lamiere", baseDuration: 25, variance: 10, qualityEffect: 5, cost: 50000, done: false},
+                        assemble_block_1: {name: "Assembla Blocco 1 (Capovolto)", baseDuration: 18, variance: 5, qualityEffect: 3, cost: 30000, visualId: "block1", done: false, isFlipped: true},
+                        assemble_block_2: {name: "Assembla Blocco 2", baseDuration: 18, variance: 5, qualityEffect: 3, cost: 30000, visualId: "block2", done: false},
+                        flip_blocks: {name: "Capovolgi e Unisci Blocchi", baseDuration: 12, variance: 3, qualityEffect: 2, cost: 20000, done: false},
+                        assemble_block_prua: {name: "Assembla Blocco Prua", baseDuration: 22, variance: 6, qualityEffect: 4, cost: 35000, visualId: "blockPrua", done: false},
+                        assemble_block_poppa: {name: "Assembla Blocco Poppa", baseDuration: 22, variance: 6, qualityEffect: 4, cost: 35000, visualId: "blockPoppa", done: false}
+                    }},
+                    outfitting: { complete: false, tasks: {
+                        electrical: {name: "Impianti Elettrici", baseDuration: 35, variance: 10, qualityEffect: 5, cost: 400000, done: false},
+                        hvac: {name: "Sistemi HVAC", baseDuration: 25, variance: 8, qualityEffect: 3, cost: 200000, done: false},
+                        engines: {name: "Installazione Motori", baseDuration: 45, variance: 10, qualityEffect: 6, cost: 500000, done: false},
+                        furnishing: {name: "Arredamenti Interni", baseDuration: 30, variance: 7, qualityEffect: 2, cost: 150000, done: false},
+                        combat_systems: {name: "Sistemi di Combattimento", baseDuration: 55, variance: 10, qualityEffect: 7, cost: 1000000, done: false}
+                    }},
+                    trials: { complete: false, tasks: {
+                        propulsion_trial: {name: "Test Propulsione", baseDuration: 8, variance: 4, qualityEffect: 5, cost: 50000, done: false},
+                        maneuver_trial: {name: "Test Manovrabilità", baseDuration: 5, variance: 3, qualityEffect: 4, cost: 30000, done: false},
+                        systems_trial: {name: "Test Sistemi di Bordo", baseDuration: 10, variance: 4, qualityEffect: 5, cost: 60000, done: false}
+                    }}
+                },
+                materials: [
+                    { id: 'steel', name: 'Lamiere di Acciaio Speciale', cost: 1500000, time: 20, ordered: false, required: true, stock:0, selected:false },
+                    { id: 'engines_mat', name: 'Motori Fincantieri Avanzati (Componenti)', cost: 2000000, time: 45, ordered: false, required: true, stock:0, selected:false },
+                    { id: 'electronics', name: 'Sistemi Elettronici di Navigazione', cost: 1000000, time: 30, ordered: false, required: true, stock:0, selected:false },
+                    { id: 'combat_sys_mat', name: 'Sistemi di Combattimento (Componenti)', cost: 2500000, time: 60, ordered: false, required: true, stock:0, selected:false },
+                    { id: 'hvac_parts', name: 'Componenti HVAC', cost: 500000, time: 15, ordered: false, required: true, stock:0, selected:false },
+                    { id: 'furnishings', name: 'Arredamenti e Finiture', cost: 300000, time: 25, ordered: false, required: true, stock:0, selected:false }
+                ],
+                activeTask: null,
+                activeTaskDetails: null,
+                taskEndTime: 0,
+                gameActive: false,
+                currentMiniGameCallback: null
+            };
+            updateUI();
+            ui.contractSection.style.display = 'block';
+            ui.dashboardSection.style.display = 'none';
+            ui.gameTabsSection.style.display = 'none';
+            ui.gameOverModal.style.display = 'none';
+            ui.acceptContractBtn.disabled = false;
+            
+            Object.values(ui.shipHullVisual).forEach(el => {
+                if(el && el !== ui.shipHullVisual.main) { // Check if element exists
+                    el.classList.remove('visible', 'flipped-visual');
+                    el.style.opacity = 0;
+                }
+            });
+            if(ui.shipHullVisual.superstructure) ui.shipHullVisual.superstructure.classList.remove('visible');
+
+
+            document.querySelectorAll('.task-status').forEach(el => el.textContent = '');
+            document.querySelectorAll('.task-btn').forEach(btn => btn.disabled = true);
+
+            document.getElementById('propulsion-budget').value = 20;
+            document.getElementById('combat-systems-budget').value = 25;
+            document.getElementById('hull-materials-budget').value = 15;
+            ui.planningFeedback.style.display = 'none';
+            ui.procurementFeedback.style.display = 'none';
+            ui.hullFeedback.style.display = 'none';
+            ui.outfittingFeedback.style.display = 'none';
+            ui.trialsFeedback.style.display = 'none';
+            ui.safetyInspectionEventUI.style.display = 'none';
+            ui.stabilityStatusDisplay.textContent = "Da Verificare";
+            ui.deliverShipBtn.disabled = true;
+            ui.sagomaturaMinigame.style.display = 'none';
+
+
+            populateMaterialsList();
+            setupTaskButtons(gameState.phases.hull.tasks, ui.hullTasksUI);
+            setupTaskButtons(gameState.phases.outfitting.tasks, ui.outfittingTasksUI);
+            setupTaskButtons(gameState.phases.trials.tasks, ui.trialTasksUI);
+            
+            ui.tabs.forEach(t => t.classList.remove('active'));
+            ui.tabContents.forEach(tc => tc.classList.remove('active'));
+            ui.tabs[0].classList.add('active');
+            ui.tabContents[0].classList.add('active');
+        }
+
+        function updateUI() {
+            ui.budgetDisplay.textContent = gameState.budget.toLocaleString();
+            ui.deadlineDisplay.textContent = gameState.deadline;
+            ui.timeElapsedDisplay.textContent = gameState.timeElapsed;
+            ui.remainingBudgetDisplay.textContent = gameState.budget.toLocaleString();
+            
+            const daysLeft = gameState.deadline - gameState.timeElapsed;
+            ui.daysRemainingDisplay.textContent = daysLeft;
+            ui.daysRemainingDisplay.className = daysLeft < 0 ? 'days-remaining negative' : 'days-remaining';
+            
+            ui.shipQualityDisplay.textContent = Math.max(0, Math.min(100, gameState.shipQuality)) + '%'; // Corrected double %
+            ui.currentPhaseDisplay.textContent = gameState.currentPhase;
+            
+            let completedPhases = 0;
+            if(gameState.phases.planning.complete) completedPhases++;
+            if(gameState.phases.procurement.materialsArrived) completedPhases++; // Changed to materialsArrived
+            if(gameState.phases.hull.complete) completedPhases++;
+            if(gameState.phases.outfitting.complete) completedPhases++;
+            if(gameState.phases.trials.complete) completedPhases++;
+            gameState.overallProgress = Math.round((completedPhases / 5) * 100);
+            ui.overallProgressBar.style.width = gameState.overallProgress + '%';
+            ui.overallProgressBar.textContent = gameState.overallProgress + '%';
+
+            updateTaskButtonsAvailability();
+        }
+        
+        function updateTaskButtonsAvailability() {
+            ui.confirmPlanningBtn.disabled = gameState.phases.planning.complete || gameState.activeTask;
+            ui.orderMaterialsBtn.disabled = gameState.phases.procurement.materialsOrdered || !gameState.phases.planning.complete || gameState.activeTask;
+            
+            function checkDependencies(tasks, currentTaskId) {
+                if (currentTaskId === 'assemble_block_1' && !tasks.shape_iron.done) return false;
+                if (currentTaskId === 'assemble_block_2' && !tasks.assemble_block_1.done) return false;
+                if (currentTaskId === 'flip_blocks' && (!tasks.assemble_block_1.done || !tasks.assemble_block_2.done)) return false;
+                if (currentTaskId === 'assemble_block_prua' && !tasks.flip_blocks.done) return false;
+                if (currentTaskId === 'assemble_block_poppa' && !tasks.flip_blocks.done) return false;
+                return true;
+            }
+
+            for (const phaseKey in gameState.phases) {
+                if (phaseKey === 'planning' || phaseKey === 'procurement') continue;
+                const phase = gameState.phases[phaseKey];
+                const uiContainer = phaseKey === 'hull' ? ui.hullTasksUI : (phaseKey === 'outfitting' ? ui.outfittingTasksUI : ui.trialTasksUI);
+                
+                for (const taskId in phase.tasks) {
+                    const task = phase.tasks[taskId];
+                    const button = uiContainer.querySelector(`.task-btn[data-task="${taskId}"]`);
+                    if (button) {
+                        let canStart = !task.done && !gameState.activeTask;
+                        if (phaseKey === 'hull') {
+                            canStart = canStart && gameState.phases.procurement.materialsArrived && checkDependencies(gameState.phases.hull.tasks, taskId);
+                        } else if (phaseKey === 'outfitting') {
+                            canStart = canStart && gameState.phases.hull.complete;
+                        } else if (phaseKey === 'trials') {
+                            canStart = canStart && gameState.phases.outfitting.complete;
+                        }
+                        button.disabled = !canStart;
+                    }
+                }
+            }
+            ui.deliverShipBtn.disabled = !gameState.phases.trials.complete || gameState.activeTask;
+        }
+
+        ui.acceptContractBtn.addEventListener('click', () => {
+            gameState.gameActive = true;
+            ui.contractSection.style.display = 'none';
+            ui.dashboardSection.style.display = 'block';
+            ui.gameTabsSection.style.display = 'block';
+            gameState.currentPhase = "Pianificazione";
+            updateUI();
+        });
+
+        ui.tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                ui.tabs.forEach(t => t.classList.remove('active'));
+                ui.tabContents.forEach(tc => tc.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        ui.confirmPlanningBtn.addEventListener('click', () => {
+            const propBudget = parseInt(document.getElementById('propulsion-budget').value);
+            const combatBudget = parseInt(document.getElementById('combat-systems-budget').value);
+            const hullBudget = parseInt(document.getElementById('hull-materials-budget').value);
+            const totalAllocated = propBudget + combatBudget + hullBudget;
+
+            if (totalAllocated > 70) {
+                ui.planningFeedback.textContent = "Allocazione budget eccessiva! Massimo 70% per queste categorie.";
+                ui.planningFeedback.style.color = COLORS.error;
+                ui.planningFeedback.style.display = 'block';
+                return;
+            }
+            if (totalAllocated < 40) {
+                 ui.planningFeedback.textContent = "Allocazione budget troppo bassa! Minimo 40% per queste categorie per una nave funzionale.";
+                ui.planningFeedback.style.color = COLORS.error;
+                ui.planningFeedback.style.display = 'block';
+                return;
+            }
+
+            gameState.phases.planning.budgetAllocated = { propulsion: propBudget, combat: combatBudget, hull: hullBudget };
+            gameState.shipQuality += Math.floor((totalAllocated - 50) / 5);
+            gameState.phases.planning.complete = true;
+            gameState.currentPhase = "Approvvigionamento Materiali";
+            ui.planningFeedback.textContent = "Pianificazione confermata! Qualità nave aggiornata.";
+            ui.planningFeedback.style.color = COLORS.success;
+            ui.planningFeedback.style.display = 'block';
+            ui.confirmPlanningBtn.disabled = true;
+            switchTab('procurement-tab');
+            updateUI();
+        });
+
+        function populateMaterialsList() {
+            ui.materialListUI.innerHTML = '';
+            gameState.materials.forEach(mat => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${mat.name} (Costo: ${mat.cost.toLocaleString()}, Tempo: ${mat.time}gg)</span>
+                    <input type="checkbox" data-id="${mat.id}" ${mat.ordered ? 'checked disabled' : ''} ${mat.required ? 'checked disabled' : ''}>
+                `;
+                const checkbox = li.querySelector('input[type="checkbox"]');
+                 if (mat.required) mat.selected = true; // Auto-select required
+                
+                if (!mat.required) {
+                    checkbox.disabled = mat.ordered;
+                    checkbox.addEventListener('change', (e) => {
+                        const material = gameState.materials.find(m => m.id === e.target.dataset.id);
+                        if (material) material.selected = e.target.checked;
+                    });
+                }
+                ui.materialListUI.appendChild(li);
+            });
+        }
+
+        ui.orderMaterialsBtn.addEventListener('click', () => {
+            if (gameState.phases.procurement.materialsOrdered || gameState.activeTask) return;
+            let totalCost = 0;
+            let maxTime = 0;
+            const materialsToOrder = gameState.materials.filter(m => m.selected && !m.ordered);
+
+            if (materialsToOrder.length === 0) {
+                ui.procurementFeedback.textContent = "Nessun nuovo materiale selezionato per l'ordine.";
+                ui.procurementFeedback.style.color = COLORS.text;
+                ui.procurementFeedback.style.display = 'block';
+                return;
+            }
+
+            materialsToOrder.forEach(mat => {
+                totalCost += mat.cost;
+                if (mat.time > maxTime) maxTime = mat.time;
+            });
+
+            if (gameState.budget < totalCost) {
+                ui.procurementFeedback.textContent = "Budget insufficiente per ordinare i materiali selezionati!";
+                ui.procurementFeedback.style.color = COLORS.error;
+                ui.procurementFeedback.style.display = 'block';
+                return;
+            }
+
+            gameState.budget -= totalCost;
+            gameState.phases.procurement.cost += totalCost; // Accumulate cost
+            materialsToOrder.forEach(mat => mat.ordered = true);
+            
+            // Disable order button if all required materials are ordered or an active task is running
+            const allRequiredOrdered = gameState.materials.filter(m => m.required).every(m => m.ordered);
+            ui.orderMaterialsBtn.disabled = allRequiredOrdered || gameState.activeTask;
+
+
+            startTask(`Consegna Materiali (${materialsToOrder.map(m=>m.name).join(', ')})`, maxTime, () => {
+                gameState.phases.procurement.materialsArrived = true; // Mark general arrival
+                materialsToOrder.forEach(m => m.stock = (m.stock || 0) + 1);
+                ui.procurementFeedback.textContent = `Materiali arrivati! Costo: ${totalCost.toLocaleString()}, Tempo: ${maxTime}gg.`;
+                ui.procurementFeedback.style.color = COLORS.success;
+                if (allRequiredOrdered) {
+                    gameState.phases.procurement.complete = true; // Phase complete only if all required are ordered and arrived
+                    gameState.currentPhase = "Costruzione Scafo";
+                    switchTab('hull-tab');
+                }
+            }, ui.procurementFeedback, true); // isTimePassingTask = true
+            
+            populateMaterialsList();
+            updateUI();
+        });
+        
+        function setupTaskButtons(tasksObject, uiContainer) {
+            uiContainer.querySelectorAll('.task-btn').forEach(button => {
+                const taskId = button.dataset.task;
+                const task = tasksObject[taskId];
+                if (task) {
+                    button.onclick = () => {
+                        if (gameState.budget < task.cost) {
+                            alert("Budget insufficiente per avviare questo compito!");
+                            return;
+                        }
+                        gameState.budget -= task.cost;
+                        
+                        // Calculate dynamic duration
+                        const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2);
+                        task.currentDuration = Math.max(1, actualDuration); // Ensure duration is at least 1
+
+                        const taskButtonElement = button; // Reference to the button for status updates
+                        const taskStatusElement = button.nextElementSibling; // The <span> for status
+
+                        if (taskId === 'shape_iron') {
+                            gameState.currentMiniGameCallback = () => {
+                                // This callback is executed after mini-game success
+                                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, taskId, taskButtonElement, taskStatusElement), ui.hullFeedback, true);
+                            };
+                            startSagomaturaMinigame();
+                        } else {
+                           startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, taskId, taskButtonElement, taskStatusElement), uiContainer.querySelector('.info-panel') || ui.hullFeedback, true);
+                        }
+                    };
+                }
+            });
+        }
+
+        function taskCompletionCallback(task, taskId, buttonElement, statusElement) {
+            task.done = true;
+            gameState.shipQuality += task.qualityEffect;
+            if (statusElement) statusElement.textContent = '✓ Completato';
+            if (statusElement) statusElement.className = 'task-status completed';
+            if (buttonElement) buttonElement.disabled = true;
+
+            // Visual updates for hull
+            if (gameState.phases.hull.tasks[taskId] && gameState.phases.hull.tasks[taskId].visualId) {
+                const visualKey = gameState.phases.hull.tasks[taskId].visualId;
+                const visualElement = ui.shipHullVisual[visualKey];
+                if (visualElement) {
+                    visualElement.classList.add('visible');
+                    if (gameState.phases.hull.tasks[taskId].isFlipped) {
+                        visualElement.classList.add('flipped-visual');
+                    }
+                }
+            }
+            if (taskId === 'flip_blocks' && ui.shipHullVisual.block1) {
+                ui.shipHullVisual.block1.classList.remove('flipped-visual');
+                // Add logic to visually "connect" blocks if desired
+            }
+            if (gameState.currentPhase === "Allestimento" && Object.values(gameState.phases.outfitting.tasks).every(t => t.done)) {
+                 if(ui.shipHullVisual.superstructure) ui.shipHullVisual.superstructure.classList.add('visible');
+            }
+
+            checkPhaseCompletion();
+            if (gameState.currentPhase === "Allestimento" && !ui.safetyInspectionEventUI.querySelector('button:disabled') && Math.random() < 0.25) {
+                ui.safetyInspectionEventUI.style.display = 'block';
+                ui.safetyInspectionEventUI.querySelector('button').disabled = false;
+            }
+        }
+        
+        ui.passInspectionBtn.addEventListener('click', () => {
+            const cost = 500;
+            const inspectionDuration = 2 + Math.floor(Math.random() * 3) - 1; // Dynamic duration 1-3 days
+            if (gameState.budget < cost) {
+                alert("Budget insufficiente per l'ispezione!"); return;
+            }
+            gameState.budget -= cost;
+            startTask("Ispezione Sicurezza", inspectionDuration, () => {
+                gameState.shipQuality += 1;
+                ui.outfittingFeedback.textContent = "Ispezione di sicurezza superata! Lavoro riprende.";
+                ui.outfittingFeedback.style.color = COLORS.success;
+                ui.outfittingFeedback.style.display = 'block';
+            }, ui.outfittingFeedback, true);
+            ui.safetyInspectionEventUI.style.display = 'none';
+            ui.passInspectionBtn.disabled = true;
+        });
+
+        // --- SAGOMATURA MINI-GAME LOGIC ---
+        function startSagomaturaMinigame() {
+            sagomaturaState.active = true;
+            sagomaturaState.cutsMade = 0;
+            sagomaturaState.targets = [];
+            ui.sagomaturaMinigame.style.display = 'block';
+            ui.lamieraVisual.innerHTML = ''; // Clear previous targets
+            ui.cutsRemainingDisplay.textContent = sagomaturaState.totalCuts;
+            ui.confirmCutsBtn.style.display = 'none';
+
+            for (let i = 0; i < sagomaturaState.totalCuts; i++) {
+                const target = document.createElement('div');
+                target.classList.add('cut-target');
+                target.style.left = `${Math.random() * 80 + 5}%`; // Random position within bounds
+                target.style.top = `${Math.random() * 70 + 10}%`;
+                target.style.width = `${Math.random() * 10 + 10}%`; // Random size
+                target.style.height = `${Math.random() * 10 + 10}%`;
+                target.dataset.cutId = i;
+                target.addEventListener('click', handleCutTargetClick);
+                ui.lamieraVisual.appendChild(target);
+                sagomaturaState.targets.push(target);
+            }
+             // Disable other game interactions during minigame
+            document.querySelectorAll('.task-btn, #order-materials-btn, #confirm-planning-btn, #deliver-ship-btn, .tab-button').forEach(btn => btn.disabled = true);
+        }
+
+        function handleCutTargetClick(event) {
+            if (!sagomaturaState.active) return;
+            const target = event.target;
+            if (!target.classList.contains('cut')) {
+                target.classList.add('cut');
+                sagomaturaState.cutsMade++;
+                ui.cutsRemainingDisplay.textContent = sagomaturaState.totalCuts - sagomaturaState.cutsMade;
+                if (sagomaturaState.cutsMade >= sagomaturaState.totalCuts) {
+                    ui.minigameStatus.textContent = "Tutti i tagli completati!";
+                    ui.confirmCutsBtn.style.display = 'inline-block';
+                }
+            }
+        }
+        
+        ui.confirmCutsBtn.addEventListener('click', () => {
+            sagomaturaState.active = false;
+            ui.sagomaturaMinigame.style.display = 'none';
+            ui.minigameStatus.textContent = ""; // Clear status
+            if (gameState.currentMiniGameCallback) {
+                gameState.currentMiniGameCallback(); // Proceed with the main task
+                gameState.currentMiniGameCallback = null;
+            }
+             // Re-enable general task buttons after minigame
+            updateTaskButtonsAvailability();
+        });
+
+
+        function startTask(taskName, duration, onCompleteCallback, feedbackEl, isTimePassingTask = false) {
+            if (gameState.activeTask && gameState.activeTask !== "Mini-Gioco Sagomatura") { // Allow minigame to interrupt other thoughts
+                alert("Un altro compito è già in corso!");
+                return;
+            }
+            gameState.activeTask = taskName;
+            gameState.activeTaskDetails = { name: taskName, duration: duration, onComplete: onCompleteCallback, feedbackElement: feedbackEl };
+            gameState.taskEndTime = gameState.timeElapsed + duration;
+            
+            if (feedbackEl) {
+                feedbackEl.textContent = `In corso: ${taskName}... (Durata stimata: ${duration}gg)`;
+                feedbackEl.style.color = COLORS.text;
+                feedbackEl.style.display = 'block';
+            }
+            
+            document.querySelectorAll('.task-btn, #order-materials-btn, #confirm-planning-btn, #deliver-ship-btn').forEach(btn => btn.disabled = true);
+            // Allow tabs to be switched, but actions within other tabs should still be blocked by activeTask
+            // ui.tabs.forEach(t => t.disabled = true); // Optionally disable tab switching
+
+            if (isTimePassingTask) {
+                let taskInterval = setInterval(() => {
+                    if (!gameState.gameActive || gameState.activeTask !== taskName) { // Task changed or game ended
+                        clearInterval(taskInterval);
+                        updateTaskButtonsAvailability(); // Re-enable buttons if task was externally stopped
+                        return;
+                    }
+                    gameState.timeElapsed++;
+                    updateUI(); 
+
+                    const currentTaskButton = Array.from(document.querySelectorAll('.task-btn')).find(btn => {
+                        const btnTaskId = btn.dataset.task;
+                        const activeTaskComparableId = gameState.activeTask?.toLowerCase().replace(/\s+/g, '_').replace(/[()]/g, '');
+                        return btnTaskId === activeTaskComparableId;
+                    });
+
+                    if(currentTaskButton && gameState.activeTask){
+                        const daysLeftForTask = gameState.taskEndTime - gameState.timeElapsed;
+                        const statusSpan = currentTaskButton.nextElementSibling;
+                        if (statusSpan) {
+                            if (daysLeftForTask > 0) {
+                                statusSpan.textContent = ` (${daysLeftForTask}gg rim.)`;
+                                statusSpan.className = 'task-status in-progress';
+                            } else {
+                                statusSpan.textContent = ` (Completamento...)`;
+                            }
+                        }
+                    }
+
+                    if (gameState.timeElapsed >= gameState.taskEndTime) {
+                        clearInterval(taskInterval);
+                        if (feedbackEl) {
+                             feedbackEl.textContent = `${taskName} completato!`;
+                             feedbackEl.style.color = COLORS.success;
+                        }
+                        gameState.activeTask = null;
+                        gameState.activeTaskDetails = null;
+                        onCompleteCallback(); // This now calls taskCompletionCallback
+                        updateTaskButtonsAvailability(); 
+                        updateUI(); 
+                        checkGameOverConditions();
+                    }
+                }, 700); // Adjusted speed
+            } else { // For tasks that don't pass time themselves (like minigame setup)
+                 // The onCompleteCallback will be called by the minigame logic
+            }
+        }
+        
+        function checkPhaseCompletion() {
+            if (!gameState.phases.hull.complete && Object.values(gameState.phases.hull.tasks).every(t => t.done)) {
+                gameState.phases.hull.complete = true;
+                gameState.currentPhase = "Allestimento";
+                let hullQualityFactor = Object.values(gameState.phases.hull.tasks).filter(t=>t.done).length / Object.values(gameState.phases.hull.tasks).length;
+                if(hullQualityFactor > 0.8) gameState.shipQuality += 5; else if (hullQualityFactor < 0.6) gameState.shipQuality -=5;
+                ui.stabilityStatusDisplay.textContent = hullQualityFactor > 0.7 ? "Buona (Principio di Archimede rispettato)" : "Scarsa (Rischio Stabilità!)";
+                if(hullQualityFactor <= 0.7) gameState.shipQuality -=10;
+                switchTab('outfitting-tab');
+            }
+            if (!gameState.phases.outfitting.complete && gameState.phases.hull.complete && Object.values(gameState.phases.outfitting.tasks).every(t => t.done)) {
+                gameState.phases.outfitting.complete = true;
+                gameState.currentPhase = "Prove in Mare";
+                if(ui.shipHullVisual.superstructure) ui.shipHullVisual.superstructure.classList.add('visible');
+                switchTab('trials-tab');
+            }
+            if (!gameState.phases.trials.complete && gameState.phases.outfitting.complete && Object.values(gameState.phases.trials.tasks).every(t => t.done)) {
+                gameState.phases.trials.complete = true;
+                gameState.currentPhase = "Pronta per Consegna";
+                ui.deliverShipBtn.disabled = false;
+            }
+            updateUI();
+        }
+        
+        function switchTab(tabId) {
+            ui.tabs.forEach(t => t.classList.remove('active'));
+            ui.tabContents.forEach(tc => tc.classList.remove('active'));
+            const newActiveTabButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+            const newActiveTabContent = document.getElementById(tabId);
+            if(newActiveTabButton) newActiveTabButton.classList.add('active');
+            if(newActiveTabContent) newActiveTabContent.classList.add('active');
+        }
+
+        ui.deliverShipBtn.addEventListener('click', () => {
+            if (gameState.phases.trials.complete) {
+                endGame(true);
+            }
+        });
+        
+        function checkGameOverConditions() {
+            if (!gameState.gameActive) return;
+            const daysOverdue = gameState.timeElapsed - gameState.deadline;
+
+            if (daysOverdue > 30 && !gameState.phases.trials.complete) { // Allow some leeway for negative days before game over
+                endGame(false, `Tempo scaduto di oltre 30 giorni! (${daysOverdue} giorni di ritardo). Contratto annullato.`);
+            } else if (gameState.budget < - (gameState.initialBudget * 0.2)) { // Game over if debt is 20% of initial budget
+                endGame(false, `Deficit di budget eccessivo! (${gameState.budget.toLocaleString()}). Impossibile continuare.`);
+            }
+        }
+
+        function calculateFinalGrade() {
+            let grade = 7; // Base sufficiency
+            const daysOverdue = Math.max(0, gameState.timeElapsed - gameState.deadline);
+
+            // Time Factor
+            if (daysOverdue === 0 && gameState.timeElapsed <= gameState.deadline) grade += 1; // On time or early
+            else if (daysOverdue <= 15) grade -= 0.5; // Slightly late
+            else if (daysOverdue <= 30) grade -= 1;   // Moderately late
+            else if (daysOverdue <= 60) grade -= 2;   // Significantly late
+            else grade -=3; // Very late
+
+            ui.finalTimeFactor.textContent = daysOverdue > 0 ? `In Ritardo (${daysOverdue}gg)` : (gameState.timeElapsed < gameState.deadline ? `In Anticipo (${gameState.deadline - gameState.timeElapsed}gg)` : "Puntuale");
+
+
+            // Quality Factor
+            const quality = Math.max(0, Math.min(100, gameState.shipQuality));
+            if (quality >= 90) grade += 2;
+            else if (quality >= 80) grade += 1;
+            else if (quality >= 70) grade += 0; // Base for 70-79
+            else if (quality >= 60) grade -= 1;
+            else if (quality >= 50) grade -= 2;
+            else grade -= 3;
+            ui.finalQualityFactor.textContent = `${quality}% (${quality >= 85 ? 'Eccellente' : quality >=70 ? 'Buona' : quality >= 55 ? 'Sufficiente' : 'Scarsa'})`;
+
+
+            // Budget Factor
+            const budgetPercentageUsed = ((gameState.initialBudget - gameState.budget) / gameState.initialBudget) * 100;
+            const budgetOverspent = gameState.budget < 0 ? Math.abs(gameState.budget) : 0;
+            
+            if (budgetOverspent === 0 && gameState.budget > gameState.initialBudget * 0.1) grade +=1; // Significant savings
+            else if (budgetOverspent > gameState.initialBudget * 0.15) grade -=2; // Significantly overbudget
+            else if (budgetOverspent > 0) grade -=1; // Moderately overbudget
+            ui.finalBudgetFactor.textContent = budgetOverspent > 0 ? `Sforato (${budgetOverspent.toLocaleString()} Cr.)` : (gameState.budget > 0 ? `Risparmiato (${gameState.budget.toLocaleString()} Cr.)` : "Preciso");
+
+            return Math.max(4, Math.min(10, parseFloat(grade.toFixed(1)))); // Clamp grade between 4 and 10
+        }
+
+
+        function endGame(success, message = "") {
+            gameState.gameActive = false; 
+            if (gameState.activeTaskDetails) { 
+                // Potentially clear intervals if any are stored globally, though the check in setInterval should handle it.
+            }
+
+            ui.gameOverModal.style.display = 'flex';
+            const finalGrade = calculateFinalGrade();
+
+            if (success && finalGrade >= 6) {
+                ui.gameOverTitle.textContent = "Congratulazioni, Comandante!";
+                ui.gameOverMessage.textContent = message || "La fregata è stata completata e consegnata con successo!";
+            } else {
+                ui.gameOverTitle.textContent = success ? "Simulazione Completata (Valutazione Insufficiente)" : "Simulazione Fallita!";
+                ui.gameOverMessage.textContent = message || (success ? "La nave è stata completata, ma la valutazione non è ottimale." : "Non sei riuscito a completare la costruzione con successo.");
+            }
+            ui.finalGradeValue.textContent = finalGrade;
+            ui.finalQualityScore.textContent = Math.max(0, Math.min(100, gameState.shipQuality));
+            ui.finalTimeTaken.textContent = gameState.timeElapsed;
+            ui.finalBudgetStatus.textContent = gameState.budget.toLocaleString() + (gameState.budget >=0 ? " Crediti Rimanenti" : " Crediti in Deficit");
+        }
+
+        ui.restartGameBtn.addEventListener('click', () => {
+            ui.gameOverModal.style.display = 'none';
+            initGame();
+        });
+
+        // Initial call
+        initGame();
+    });
+    </script>
+</body>
+</html>
