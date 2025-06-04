@@ -537,6 +537,98 @@
                             <p id="minigame-status">Tagli rimanenti: <span id="cuts-remaining">0</span></p>
                             <button id="confirm-cuts-btn" style="display:none;">Conferma Tagli</button>
                         </div>
+
+                        <!-- Assemble Block 1 Minigame -->
+                        <div id="assemble-block-1-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #f0f0f0;">
+                            <h4>Mini-Gioco: Assembla Blocco 1</h4>
+                            <p>Trascina i componenti nelle loro posizioni corrette sul blocco.</p>
+                            <div id="block-1-puzzle-area" style="position:relative; width:300px; height:200px; background-color:#e0e0e0; border:1px solid #999; margin:10px auto;">
+                                <!-- Drop Zones -->
+                                <div class="drop-zone" data-zoneid="1" style="position:absolute; left:20px; top:20px; width:100px; height:50px; border:1px dashed #666; background-color: #d0d0d0;"></div>
+                                <div class="drop-zone" data-zoneid="2" style="position:absolute; left:150px; top:70px; width:80px; height:100px; border:1px dashed #666; background-color: #d0d0d0;"></div>
+                                <div class="drop-zone" data-zoneid="3" style="position:absolute; left:20px; top:130px; width:120px; height:50px; border:1px dashed #666; background-color: #d0d0d0;"></div>
+                            </div>
+                            <div id="block-1-components" style="margin-top:10px; text-align:center;">
+                                <!-- Draggable Pieces -->
+                                <div class="draggable-piece" draggable="true" data-pieceid="1" style="width:90px; height:40px; background-color:teal; color:white; display:inline-block; margin:5px; text-align:center; line-height:40px; cursor:grab;">Comp A</div>
+                                <div class="draggable-piece" draggable="true" data-pieceid="2" style="width:70px; height:90px; background-color:orange; color:white; display:inline-block; margin:5px; text-align:center; line-height:90px; cursor:grab;">Comp B</div>
+                                <div class="draggable-piece" draggable="true" data-pieceid="3" style="width:110px; height:40px; background-color:purple; color:white; display:inline-block; margin:5px; text-align:center; line-height:40px; cursor:grab;">Comp C</div>
+                            </div>
+                            <p id="assemble-block-1-minigame-status">Trascina i pezzi.</p>
+                            <button id="reset-block-1-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Assemble Block 2 Minigame -->
+                        <div id="assemble-block-2-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #f0f0f0;">
+                            <h4>Mini-Gioco: Assembla Blocco 2</h4>
+                            <p>Trascina i componenti specifici del Blocco 2 nelle loro posizioni.</p>
+                            <div id="block-2-puzzle-area" style="position:relative; width:320px; height:220px; background-color:#e0e0e0; border:1px solid #999; margin:10px auto;">
+                                <!-- Drop Zones for Block 2 -->
+                                <div class="drop-zone-b2" data-zoneid="b2-1" style="position:absolute; left:30px; top:10px; width:120px; height:60px; border:1px dashed #555; background-color: #c8c8c8;"></div>
+                                <div class="drop-zone-b2" data-zoneid="b2-2" style="position:absolute; left:180px; top:50px; width:100px; height:150px; border:1px dashed #555; background-color: #c8c8c8;"></div>
+                                <div class="drop-zone-b2" data-zoneid="b2-3" style="position:absolute; left:10px; top:100px; width:140px; height:70px; border:1px dashed #555; background-color: #c8c8c8;"></div>
+                            </div>
+                            <div id="block-2-components" style="margin-top:10px; text-align:center;">
+                                <!-- Draggable Pieces for Block 2 -->
+                                <div class="draggable-piece-b2" draggable="true" data-pieceid="b2-1" style="width:110px; height:50px; background-color:darkcyan; color:white; display:inline-block; margin:5px; text-align:center; line-height:50px; cursor:grab;">Strutt. X</div>
+                                <div class="draggable-piece-b2" draggable="true" data-pieceid="b2-2" style="width:90px; height:140px; background-color:crimson; color:white; display:inline-block; margin:5px; text-align:center; line-height:140px; cursor:grab;">Paratia Y</div>
+                                <div class="draggable-piece-b2" draggable="true" data-pieceid="b2-3" style="width:130px; height:60px; background-color:darkslateblue; color:white; display:inline-block; margin:5px; text-align:center; line-height:60px; cursor:grab;">Supporto Z</div>
+                            </div>
+                            <p id="assemble-block-2-minigame-status">Trascina i pezzi del Blocco 2.</p>
+                            <button id="reset-block-2-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Flip Blocks Minigame -->
+                        <div id="flip-blocks-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #f0f0f0;">
+                            <h4>Mini-Gioco: Capovolgi Blocchi</h4>
+                            <p>Attiva le gru nella sequenza corretta per capovolgere e unire i blocchi.</p>
+                            <div id="flip-blocks-visual-area" style="width:200px; height:100px; background-color:#d9ead3; border:1px solid #8fbc8f; margin:10px auto; text-align:center; line-height:100px;">
+                                Blocchi Pronti (Visual)
+                            </div>
+                            <div id="flip-blocks-sequence-display" style="margin:10px auto; padding:10px; background-color:#eee; text-align:center; min-height: 30px;">
+                                <!-- Sequenza da memorizzare apparirà qui -->
+                            </div>
+                            <div id="flip-blocks-controls" style="text-align:center; margin-top:10px;">
+                                <button class="crane-btn" data-craneid="crane_alpha" style="padding:10px 15px; margin:5px; background-color: #ffcc80;">Gru Alfa</button>
+                                <button class="crane-btn" data-craneid="crane_beta" style="padding:10px 15px; margin:5px; background-color: #80cbc4;">Gru Beta</button>
+                                <button class="crane-btn" data-craneid="crane_gamma" style="padding:10px 15px; margin:5px; background-color: #90caf9;">Gru Gamma</button>
+                            </div>
+                            <p id="flip-blocks-minigame-status">Memorizza la sequenza, poi clicca i pulsanti Gru.</p>
+                            <button id="reset-flip-blocks-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Assemble Prua Minigame -->
+                        <div id="assemble-prua-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #f0f0f0;">
+                            <h4>Mini-Gioco: Assembla Prua (Saldatura)</h4>
+                            <p>Clicca i punti di saldatura nella sequenza in cui vengono illuminati.</p>
+                            <div id="prua-schematic-area" style="position:relative; width:250px; height:180px; background-color:#cce5ff; border:1px solid #5b9bd5; margin:10px auto; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22250%22%20height%3D%22180%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M20%20160%20Q%20125%200%2C%20230%20160%22%20stroke%3D%22%23a0a0a0%22%20stroke-width%3D%222%22%20fill%3D%22transparent%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-size%3D%2212%22%3EPrua Schematic%3C/text%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: center;">
+                                <!-- Weld points will be dynamically added or pre-defined here -->
+                                <div class="weld-point" data-pointid="p1" style="position:absolute; left:30px; top:140px; width:15px; height:15px; background-color:red; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point" data-pointid="p2" style="position:absolute; left:80px; top:90px; width:15px; height:15px; background-color:red; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point" data-pointid="p3" style="position:absolute; left:125px; top:50px; width:15px; height:15px; background-color:red; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point" data-pointid="p4" style="position:absolute; left:170px; top:90px; width:15px; height:15px; background-color:red; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point" data-pointid="p5" style="position:absolute; left:220px; top:140px; width:15px; height:15px; background-color:red; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                            </div>
+                            <p id="assemble-prua-minigame-status">Memorizza la sequenza di saldatura.</p>
+                            <button id="reset-prua-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Assemble Poppa Minigame -->
+                        <div id="assemble-poppa-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #f0f0f0;">
+                            <h4>Mini-Gioco: Assembla Poppa (Saldatura)</h4>
+                            <p>Clicca i punti di saldatura della poppa nella sequenza illuminata.</p>
+                            <div id="poppa-schematic-area" style="position:relative; width:250px; height:180px; background-color:#ffe0b2; border:1px solid #f57c00; margin:10px auto; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22250%22%20height%3D%22180%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%22210%22%20height%3D%22140%22%20stroke%3D%22%23a0a0a0%22%20stroke-width%3D%222%22%20fill%3D%22transparent%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23888%22%20font-size%3D%2212%22%3ESchema Poppa%3C/text%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: center;">
+                                <!-- Weld points for Poppa -->
+                                <div class="weld-point-poppa" data-pointid="s1" style="position:absolute; left:40px; top:40px; width:15px; height:15px; background-color:darkblue; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point-poppa" data-pointid="s2" style="position:absolute; left:100px; top:70px; width:15px; height:15px; background-color:darkblue; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point-poppa" data-pointid="s3" style="position:absolute; left:150px; top:40px; width:15px; height:15px; background-color:darkblue; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point-poppa" data-pointid="s4" style="position:absolute; left:200px; top:70px; width:15px; height:15px; background-color:darkblue; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                                <div class="weld-point-poppa" data-pointid="s5" style="position:absolute; left:100px; top:130px; width:15px; height:15px; background-color:darkblue; border-radius:50%; cursor:pointer; box-shadow: 0 0 3px black;"></div>
+                            </div>
+                            <p id="assemble-poppa-minigame-status">Memorizza la sequenza di saldatura della poppa.</p>
+                            <button id="reset-poppa-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
                         <h4>Compiti Scafo:</h4>
                         <ul id="hull-tasks" class="task-list">
                            <li>Sagomatura Lamiere <button class="task-btn" data-task="shape_iron">Avvia</button> <span class="task-status"></span></li>
@@ -553,6 +645,84 @@
                     <div id="outfitting-tab" class="tab-content">
                         <h3><span class="icon">🔧</span> Allestimento Strutture</h3>
                         <p>Coordina le officine specializzate per installare tutti i sistemi.</p>
+
+                        <!-- Electrical Minigame Area -->
+                        <div id="electrical-minigame" style="display:none; padding: 15px; border: 1px solid #ddd; border-radius: 5px; margin-top: 15px; background-color: #f9f9f9;">
+                            <h4>Mini-Gioco: Cablaggio Impianto Elettrico</h4>
+                            <p>Ripeti la sequenza di colori dei cavi. Clicca sui cavi nell'ordine corretto.</p>
+                            <div id="electrical-sequence-display" style="margin-bottom: 10px; padding: 10px; background-color: #eee; border-radius: 3px; min-height: 30px;">
+                                <!-- Sequenza generata apparirà qui -->
+                            </div>
+                            <div id="electrical-wires-clickable" style="margin-bottom: 10px;">
+                                <button class="wire-btn" data-color="red" style="background-color: red; color: white; margin: 5px; padding: 10px;">Rosso</button>
+                                <button class="wire-btn" data-color="blue" style="background-color: blue; color: white; margin: 5px; padding: 10px;">Blu</button>
+                                <button class="wire-btn" data-color="green" style="background-color: green; color: white; margin: 5px; padding: 10px;">Verde</button>
+                                <button class="wire-btn" data-color="yellow" style="background-color: yellow; color: black; margin: 5px; padding: 10px;">Giallo</button>
+                            </div>
+                            <p id="electrical-minigame-status">Pronto per iniziare.</p>
+                            <button id="confirm-electrical-sequence-btn" style="display:none;">Conferma Sequenza</button>
+                        </div>
+
+                        <!-- HVAC Minigame -->
+                        <div id="hvac-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #e6f7ff;">
+                            <h4>Mini-Gioco: Attivazione Sistema HVAC</h4>
+                            <p>Apri tutte le valvole chiuse (rosse) per attivare il sistema. Clicca sulle valvole per cambiarne lo stato.</p>
+                            <div id="hvac-valve-area" style="display:flex; flex-wrap:wrap; justify-content:center; padding:10px;">
+                                <!-- Valves will be dynamically added here -->
+                            </div>
+                            <p id="hvac-minigame-status">Apri tutte le valvole rosse.</p>
+                            <button id="reset-hvac-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Engines Minigame -->
+                        <div id="engines-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #fff0e6;">
+                            <h4>Mini-Gioco: Installazione Motori (Serraggio Bulloni)</h4>
+                            <p>Serra i bulloni nella sequenza corretta (quella illuminata).</p>
+                            <div id="engine-schematic-area" style="position:relative; width:280px; height:200px; background-color:#d1c4e9; border:1px solid #5e35b1; margin:10px auto; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22280%22%20height%3D%22200%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Crect%20x%3D%2240%22%20y%3D%2230%22%20width%3D%22200%22%20height%3D%22140%22%20rx%3D%2210%22%20stroke%3D%22%23777%22%20stroke-width%3D%223%22%20fill%3D%22%23b0bec5%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23444%22%20font-size%3D%2212%22%3ESchema Motore%3C/text%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: center;">
+                                <!-- Bolts for Engines -->
+                                <div class="engine-bolt" data-boltid="b1" style="position:absolute; left:50px; top:40px; width:20px; height:20px; background-color:gray; border:2px solid #555; border-radius:3px; cursor:pointer;"></div>
+                                <div class="engine-bolt" data-boltid="b2" style="position:absolute; left:130px; top:40px; width:20px; height:20px; background-color:gray; border:2px solid #555; border-radius:3px; cursor:pointer;"></div>
+                                <div class="engine-bolt" data-boltid="b3" style="position:absolute; left:210px; top:40px; width:20px; height:20px; background-color:gray; border:2px solid #555; border-radius:3px; cursor:pointer;"></div>
+                                <div class="engine-bolt" data-boltid="b4" style="position:absolute; left:50px; top:140px; width:20px; height:20px; background-color:gray; border:2px solid #555; border-radius:3px; cursor:pointer;"></div>
+                                <div class="engine-bolt" data-boltid="b5" style="position:absolute; left:130px; top:140px; width:20px; height:20px; background-color:gray; border:2px solid #555; border-radius:3px; cursor:pointer;"></div>
+                                <div class="engine-bolt" data-boltid="b6" style="position:absolute; left:210px; top:140px; width:20px; height:20px; background-color:gray; border:2px solid #555; border-radius:3px; cursor:pointer;"></div>
+                            </div>
+                            <p id="engines-minigame-status">Memorizza la sequenza di serraggio.</p>
+                            <button id="reset-engines-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Furnishing Minigame -->
+                        <div id="furnishing-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #e8f5e9;">
+                            <h4>Mini-Gioco: Arredamento Interni</h4>
+                            <p>Posiziona i mobili nelle aree corrette della cabina.</p>
+                            <div id="room-layout-area" style="position:relative; width:350px; height:250px; background-color:#fff9c4; border:2px solid #fbc02d; margin:10px auto; background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22350%22%20height%3D%22250%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Crect%20x%3D%2210%22%20y%3D%2210%22%20width%3D%22330%22%20height%3D%22230%22%20stroke%3D%22%23ccc%22%20stroke-width%3D%221%22%20fill%3D%22%23fffde7%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20dominant-baseline%3D%22middle%22%20text-anchor%3D%22middle%22%20fill%3D%22%23a0a0a0%22%20font-size%3D%2212%22%3ELayout Cabina%3C/text%3E%3C/svg%3E');">
+                                <!-- Drop Zones for Furniture -->
+                                <div class="furniture-drop-zone" data-zoneid="fz-bed" style="position:absolute; left:20px; top:20px; width:100px; height:150px; border:1px dashed #795548; background-color: rgba(161, 136, 127, 0.2);">Letto</div>
+                                <div class="furniture-drop-zone" data-zoneid="fz-desk" style="position:absolute; left:150px; top:20px; width:120px; height:70px; border:1px dashed #795548; background-color: rgba(161, 136, 127, 0.2);">Scrivania</div>
+                                <div class="furniture-drop-zone" data-zoneid="fz-wardrobe" style="position:absolute; left:150px; top:120px; width:70px; height:100px; border:1px dashed #795548; background-color: rgba(161, 136, 127, 0.2);">Armadio</div>
+                            </div>
+                            <div id="furniture-pieces-area" style="margin-top:10px; text-align:center; padding:10px; background-color:#d7ccc8;">
+                                <!-- Draggable Furniture Pieces -->
+                                <div class="draggable-furniture" draggable="true" data-pieceid="f-bed" style="width:90px; height:140px; background-color:#8d6e63; color:white; display:inline-flex; align-items:center; justify-content:center; margin:5px; cursor:grab; border:1px solid #5d4037;">Letto</div>
+                                <div class="draggable-furniture" draggable="true" data-pieceid="f-desk" style="width:110px; height:60px; background-color:#757575; color:white; display:inline-flex; align-items:center; justify-content:center; margin:5px; cursor:grab; border:1px solid #424242;">Scrivania</div>
+                                <div class="draggable-furniture" draggable="true" data-pieceid="f-wardrobe" style="width:60px; height:90px; background-color:#a1887f; color:white; display:inline-flex; align-items:center; justify-content:center; margin:5px; cursor:grab; border:1px solid #6d4c41;">Armadio</div>
+                            </div>
+                            <p id="furnishing-minigame-status">Posiziona i mobili.</p>
+                            <button id="reset-furnishing-minigame-btn" style="margin-top:10px;">Ricomincia Mini-Gioco</button>
+                        </div>
+
+                        <!-- Combat Systems Minigame -->
+                        <div id="combat-systems-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #333; color:white;">
+                            <h4>Mini-Gioco: Calibrazione Sistemi di Combattimento</h4>
+                            <p>Clicca sui bersagli che appaiono sullo schermo radar il più velocemente possibile.</p>
+                            <div id="radar-screen" style="position:relative; width:300px; height:250px; background-color:#002200; border:2px solid limegreen; margin:10px auto; overflow:hidden;">
+                                <!-- Targets will be dynamically added here -->
+                            </div>
+                            <p id="combat-systems-minigame-status" style="text-align:center; margin-top:10px;">Punteggio: <span id="combat-score">0</span> / Obiettivo: <span id="combat-target-goal">0</span></p>
+                            <p id="combat-systems-timer" style="text-align:center; font-size:1.2em;">Tempo Rimanente: <span id="combat-time-left">30</span>s</p>
+                            <button id="reset-combat-systems-minigame-btn" style="margin-top:10px; display:block; margin-left:auto; margin-right:auto;">Ricomincia Mini-Gioco</button>
+                        </div>
+
                         <h4>Officine:</h4>
                         <ul id="outfitting-tasks" class="task-list">
                             <li>Impianti Elettrici <button class="task-btn" data-task="electrical">Avvia</button> <span class="task-status"></span></li>
@@ -576,6 +746,24 @@
                             <p><strong>Stabilità (Archimede):</strong> <span id="stability-status">Da Verificare</span></p>
                             <p>La prua è stata progettata per essere più leggera, contribuendo alla stabilità.</p>
                         </div>
+
+                        <!-- Propulsion Trial Minigame -->
+                        <div id="propulsion-trial-minigame" style="display:none; padding:15px; border:1px solid #ccc; margin-bottom:15px; background-color: #e0f2f1;">
+                            <h4>Mini-Gioco: Test Propulsione (Controllo Regime Motore)</h4>
+                            <p>Mantieni l'indicatore di velocità (blu) all'interno della zona target (verde) usando i pulsanti.</p>
+                            <div id="throttle-control-area" style="position:relative; width:80px; height:250px; background-color:#b2dfdb; border:1px solid #00796b; margin:10px auto;">
+                                <div id="propulsion-target-zone" style="position:absolute; left:0; width:100%; height:50px; background-color:rgba(76, 175, 80, 0.7); border-top: 1px solid green; border-bottom: 1px solid green;"></div>
+                                <div id="propulsion-player-marker" style="position:absolute; left:10%; width:80%; height:10px; background-color:blue; bottom: 10px;"></div>
+                            </div>
+                            <div id="propulsion-controls" style="text-align:center; margin-top:10px;">
+                                <button id="increase-throttle-btn" style="padding:10px 15px; margin:5px; background-color:#81c784;">Aumenta Regime</button>
+                                <button id="decrease-throttle-btn" style="padding:10px 15px; margin:5px; background-color:#ef9a9a;">Riduci Regime</button>
+                            </div>
+                            <p id="propulsion-trial-status" style="text-align:center; margin-top:10px;">Punteggio Stabilità: <span id="propulsion-score">0</span> / Obiettivo: <span id="propulsion-goal">100</span></p>
+                            <p id="propulsion-trial-timer" style="text-align:center;">Tempo Rimanente: <span id="propulsion-time">20</span>s</p>
+                            <button id="reset-propulsion-trial-btn" style="margin-top:10px; display:block; margin-left:auto; margin-right:auto;">Ricomincia Test</button>
+                        </div>
+
                         <h4>Test da Eseguire (Lunghezza percorso: 150m):</h4>
                         <ul id="trial-tasks" class="task-list">
                            <li>Test Propulsione <button class="task-btn" data-task="propulsion_trial">Avvia</button> <span class="task-status"></span></li>
@@ -661,6 +849,68 @@
             lamieraVisual: document.getElementById('lamiera-visual'),
             cutsRemainingDisplay: document.getElementById('cuts-remaining'),
             confirmCutsBtn: document.getElementById('confirm-cuts-btn'),
+      minigameStatus: document.getElementById('minigame-status'),
+            assembleBlock1MinigameArea: document.getElementById('assemble-block-1-minigame'),
+            block1PuzzleArea: document.getElementById('block-1-puzzle-area'),
+            block1ComponentsArea: document.getElementById('block-1-components'),
+            assembleBlock1MinigameStatus: document.getElementById('assemble-block-1-minigame-status'),
+            resetBlock1MinigameBtn: document.getElementById('reset-block-1-minigame-btn'),
+            assembleBlock2MinigameArea: document.getElementById('assemble-block-2-minigame'),
+            block2PuzzleArea: document.getElementById('block-2-puzzle-area'),
+            block2ComponentsArea: document.getElementById('block-2-components'),
+            assembleBlock2MinigameStatus: document.getElementById('assemble-block-2-minigame-status'),
+            resetBlock2MinigameBtn: document.getElementById('reset-block-2-minigame-btn'),
+            flipBlocksMinigameArea: document.getElementById('flip-blocks-minigame'),
+            flipBlocksVisualArea: document.getElementById('flip-blocks-visual-area'),
+            flipBlocksSequenceDisplay: document.getElementById('flip-blocks-sequence-display'),
+            flipBlocksControls: document.getElementById('flip-blocks-controls'),
+            flipBlocksMinigameStatus: document.getElementById('flip-blocks-minigame-status'),
+            resetFlipBlocksMinigameBtn: document.getElementById('reset-flip-blocks-minigame-btn'),
+            assemblePruaMinigameArea: document.getElementById('assemble-prua-minigame'),
+            pruaSchematicArea: document.getElementById('prua-schematic-area'),
+            assemblePruaMinigameStatus: document.getElementById('assemble-prua-minigame-status'),
+            resetPruaMinigameBtn: document.getElementById('reset-prua-minigame-btn'),
+            assemblePoppaMinigameArea: document.getElementById('assemble-poppa-minigame'),
+            poppaSchematicArea: document.getElementById('poppa-schematic-area'),
+            assemblePoppaMinigameStatus: document.getElementById('assemble-poppa-minigame-status'),
+            resetPoppaMinigameBtn: document.getElementById('reset-poppa-minigame-btn'),
+            hvacMinigameArea: document.getElementById('hvac-minigame'),
+            hvacValveArea: document.getElementById('hvac-valve-area'),
+            hvacMinigameStatus: document.getElementById('hvac-minigame-status'),
+            resetHvacMinigameBtn: document.getElementById('reset-hvac-minigame-btn'),
+            enginesMinigameArea: document.getElementById('engines-minigame'),
+            engineSchematicArea: document.getElementById('engine-schematic-area'),
+            enginesMinigameStatus: document.getElementById('engines-minigame-status'),
+            resetEnginesMinigameBtn: document.getElementById('reset-engines-minigame-btn'),
+            furnishingMinigameArea: document.getElementById('furnishing-minigame'),
+            roomLayoutArea: document.getElementById('room-layout-area'),
+            furniturePiecesArea: document.getElementById('furniture-pieces-area'),
+            furnishingMinigameStatus: document.getElementById('furnishing-minigame-status'),
+            resetFurnishingMinigameBtn: document.getElementById('reset-furnishing-minigame-btn'),
+            combatSystemsMinigameArea: document.getElementById('combat-systems-minigame'),
+            radarScreen: document.getElementById('radar-screen'),
+            combatSystemsMinigameStatus: document.getElementById('combat-systems-minigame-status'),
+            combatScoreDisplay: document.getElementById('combat-score'),
+            combatTargetGoalDisplay: document.getElementById('combat-target-goal'),
+            combatSystemsTimer: document.getElementById('combat-systems-timer'),
+            combatTimeLeftDisplay: document.getElementById('combat-time-left'),
+            resetCombatSystemsMinigameBtn: document.getElementById('reset-combat-systems-minigame-btn'),
+            propulsionTrialMinigameArea: document.getElementById('propulsion-trial-minigame'),
+            throttleControlArea: document.getElementById('throttle-control-area'),
+            propulsionTargetZone: document.getElementById('propulsion-target-zone'),
+            propulsionPlayerMarker: document.getElementById('propulsion-player-marker'),
+            increaseThrottleBtn: document.getElementById('increase-throttle-btn'),
+            decreaseThrottleBtn: document.getElementById('decrease-throttle-btn'),
+            propulsionTrialStatus: document.getElementById('propulsion-trial-status'),
+            propulsionScoreDisplay: document.getElementById('propulsion-score'),
+            propulsionGoalDisplay: document.getElementById('propulsion-goal'),
+            propulsionTrialTimerDisplay: document.getElementById('propulsion-time'),
+            resetPropulsionTrialBtn: document.getElementById('reset-propulsion-trial-btn'),
+            electricalMinigameArea: document.getElementById('electrical-minigame'),
+            electricalSequenceDisplay: document.getElementById('electrical-sequence-display'),
+            electricalWiresClickable: document.getElementById('electrical-wires-clickable'),
+            electricalMinigameStatus: document.getElementById('electrical-minigame-status'),
+            confirmElectricalSequenceBtn: document.getElementById('confirm-electrical-sequence-btn'),
             outfittingTasksUI: document.getElementById('outfitting-tasks'),
             safetyInspectionEventUI: document.getElementById('safety-inspection-event'),
             passInspectionBtn: document.getElementById('pass-inspection-btn'),
@@ -738,7 +988,99 @@
                 activeTaskDetails: null,
                 taskEndTime: 0,
                 gameActive: false,
-                currentMiniGameCallback: null
+                currentMiniGameCallback: null,
+                electricalMinigameState: {
+                    active: false,
+                    sequence: [],
+                    playerSequence: [],
+                    level: 3, // Initial sequence length
+                    maxLevel: 7
+                },
+                assembleBlock1MinigameState: {
+                    active: false,
+                    piecesInPlace: 0,
+                    totalPieces: 3,
+                    correctPlacements: { '1':'1', '2':'2', '3':'3' } // pieceid:zoneid mapping
+                },
+                assembleBlock2MinigameState: {
+                    active: false,
+                    piecesInPlace: 0,
+                    totalPieces: 3,
+                    correctPlacements: { 'b2-1':'b2-1', 'b2-2':'b2-2', 'b2-3':'b2-3' }
+                },
+                flipBlocksMinigameState: {
+                    active: false,
+                    sequence: [],
+                    playerSequence: [],
+                    currentLevel: 0,
+                    sequenceLength: 4,
+                    availableCranes: ['crane_alpha', 'crane_beta', 'crane_gamma']
+                },
+                assemblePruaMinigameState: {
+                    active: false,
+                    sequence: [],
+                    playerSequence: [],
+                    weldPoints: ['p1', 'p2', 'p3', 'p4', 'p5'],
+                    sequenceLength: 4,
+                    highlightDuration: 500,
+                    pauseBetweenHighlights: 300
+                },
+                assemblePoppaMinigameState: {
+                    active: false,
+                    sequence: [],
+                    playerSequence: [],
+                    weldPoints: ['s1', 's2', 's3', 's4', 's5'],
+                    sequenceLength: 4,
+                    highlightDuration: 450,
+                    pauseBetweenHighlights: 250
+                },
+                hvacMinigameState: {
+                    active: false,
+                    valves: [],
+                    totalValves: 5,
+                    openValvesNeeded: 0
+                },
+                enginesMinigameState: {
+                    active: false,
+                    sequence: [],
+                    playerSequence: [],
+                    bolts: ['b1', 'b2', 'b3', 'b4', 'b5', 'b6'],
+                    sequenceLength: 5,
+                    highlightDuration: 400,
+                    pauseBetweenHighlights: 200
+                },
+                furnishingMinigameState: {
+                    active: false,
+                    piecesInPlace: 0,
+                    totalPieces: 3,
+                    correctPlacements: { 'f-bed':'fz-bed', 'f-desk':'fz-desk', 'f-wardrobe':'fz-wardrobe' }
+                },
+                combatSystemsMinigameState: {
+                    active: false,
+                    score: 0,
+                    targetGoal: 10,
+                    timeLeft: 30,
+                    targetIntervalId: null,
+                    gameTimerId: null,
+                    targetSpawnRate: 1500,
+                    targetLife: 2000
+                },
+                propulsionTrialMinigameState: {
+                    active: false,
+                    score: 0,
+                    goal: 100,
+                    timeLeft: 20,
+                    gameLoopId: null,
+                    timerId: null,
+                    markerPos: 10,
+                    markerSpeed: 3,
+                    targetPos: 40, // Bottom edge of target zone, from container bottom
+                    targetHeight: 20,
+                    targetSpeed: 0.5,
+                    targetDirection: 1,
+                    maxMarkerPos: 96, // 100 - marker height (4%)
+                    minMarkerPos: 0
+                },
             };
             updateUI();
             ui.contractSection.style.display = 'block';
@@ -902,18 +1244,29 @@
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span>${mat.name} (Costo: ${mat.cost.toLocaleString()}, Tempo: ${mat.time}gg)</span>
-                    <input type="checkbox" data-id="${mat.id}" ${mat.ordered ? 'checked disabled' : ''} ${mat.required ? 'checked disabled' : ''}>
+                    <input type="checkbox" data-id="${mat.id}" ${mat.selected ? 'checked' : ''} ${ (mat.required || mat.ordered) ? 'disabled' : '' }>
                 `;
                 const checkbox = li.querySelector('input[type="checkbox"]');
-                 if (mat.required) mat.selected = true; // Auto-select required
-                
-                if (!mat.required) {
-                    checkbox.disabled = mat.ordered;
-                    checkbox.addEventListener('change', (e) => {
-                        const material = gameState.materials.find(m => m.id === e.target.dataset.id);
-                        if (material) material.selected = e.target.checked;
-                    });
+
+                // Set initial selected state for required materials
+                if (mat.required) {
+                  mat.selected = true;
+                  checkbox.checked = true;
+                  checkbox.disabled = true;
+                } else {
+                  // For non-required materials, the 'selected' property from gameState is the source of truth
+                  checkbox.checked = mat.selected; // This will be false by default for non-required
+                  checkbox.disabled = mat.ordered; // Can only be disabled if ordered, as required is false here
                 }
+
+                checkbox.addEventListener('change', (e) => {
+                  const material = gameState.materials.find(m => m.id === e.target.dataset.id);
+                  if (material) {
+                    material.selected = e.target.checked;
+                    // console.log(`Material ${material.name} selected state: ${material.selected}`); // Optional debug
+                    // updateTotalCostAndTime(); // Ensure this function exists and is needed here
+                  }
+                });
                 ui.materialListUI.appendChild(li);
             });
         }
@@ -973,30 +1326,75 @@
                 const taskId = button.dataset.task;
                 const task = tasksObject[taskId];
                 if (task) {
-                    button.onclick = () => {
-                        if (gameState.budget < task.cost) {
-                            alert("Budget insufficiente per avviare questo compito!");
-                            return;
-                        }
-                        gameState.budget -= task.cost;
-                        
-                        // Calculate dynamic duration
-                        const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2);
-                        task.currentDuration = Math.max(1, actualDuration); // Ensure duration is at least 1
+                    if (taskId === 'electrical' && uiContainer === ui.outfittingTasksUI) {
+                        button.onclick = () => {
+                            startElectricalMinigame();
+                        };
+                    } else if (taskId === 'hvac' && uiContainer === ui.outfittingTasksUI) {
+                        button.onclick = () => {
+                            startHvacMinigame();
+                        };
+                    } else if (taskId === 'engines' && uiContainer === ui.outfittingTasksUI) {
+                        button.onclick = () => {
+                            startEnginesMinigame();
+                        };
+                    } else if (taskId === 'furnishing' && uiContainer === ui.outfittingTasksUI) {
+                        button.onclick = () => {
+                            startFurnishingMinigame();
+                        };
+                    } else if (taskId === 'combat_systems' && uiContainer === ui.outfittingTasksUI) {
+                        button.onclick = () => {
+                            startCombatSystemsMinigame();
+                        };
+                    } else if (taskId === 'propulsion_trial' && uiContainer === ui.trialTasksUI) {
+                        button.onclick = () => {
+                            startPropulsionTrialMinigame();
+                        };
+                    } else if (taskId === 'assemble_block_1' && uiContainer === ui.hullTasksUI) {
+                        button.onclick = () => {
+                            startAssembleBlock1Minigame();
+                        };
+                    } else if (taskId === 'assemble_block_2' && uiContainer === ui.hullTasksUI) {
+                        button.onclick = () => {
+                            startAssembleBlock2Minigame();
+                        };
+                    } else if (taskId === 'flip_blocks' && uiContainer === ui.hullTasksUI) {
+                        button.onclick = () => {
+                            startFlipBlocksMinigame();
+                        };
+                    } else if (taskId === 'assemble_block_prua' && uiContainer === ui.hullTasksUI) {
+                        button.onclick = () => {
+                            startAssemblePruaMinigame();
+                        };
+                    } else if (taskId === 'assemble_block_poppa' && uiContainer === ui.hullTasksUI) {
+                        button.onclick = () => {
+                            startAssemblePoppaMinigame();
+                        };
+                    } else { // Existing logic for other tasks
+                        button.onclick = () => {
+                            if (gameState.budget < task.cost) {
+                                alert("Budget insufficiente per avviare questo compito!");
+                                return;
+                            }
+                            gameState.budget -= task.cost;
 
-                        const taskButtonElement = button; // Reference to the button for status updates
-                        const taskStatusElement = button.nextElementSibling; // The <span> for status
+                            // Calculate dynamic duration
+                            const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2);
+                            task.currentDuration = Math.max(1, actualDuration); // Ensure duration is at least 1
 
-                        if (taskId === 'shape_iron') {
-                            gameState.currentMiniGameCallback = () => {
-                                // This callback is executed after mini-game success
-                                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, taskId, taskButtonElement, taskStatusElement), ui.hullFeedback, true);
-                            };
-                            startSagomaturaMinigame();
-                        } else {
-                           startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, taskId, taskButtonElement, taskStatusElement), uiContainer.querySelector('.info-panel') || ui.hullFeedback, true);
-                        }
-                    };
+                            const taskButtonElement = button; // Reference to the button for status updates
+                            const taskStatusElement = button.nextElementSibling; // The <span> for status
+
+                            if (taskId === 'shape_iron' && uiContainer === ui.hullTasksUI) { // Added specific check for shape_iron in hull
+                                gameState.currentMiniGameCallback = () => {
+                                    startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, taskId, taskButtonElement, taskStatusElement), ui.hullFeedback, true);
+                                };
+                                startSagomaturaMinigame();
+                            } else {
+                               startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, taskId, taskButtonElement, taskStatusElement), uiContainer.querySelector('.info-panel') || ui.hullFeedback, true);
+                            }
+                        };
+                    }
                 }
             });
         }
@@ -1055,23 +1453,94 @@
         function startSagomaturaMinigame() {
             sagomaturaState.active = true;
             sagomaturaState.cutsMade = 0;
-            sagomaturaState.targets = [];
-            ui.sagomaturaMinigame.style.display = 'block';
             ui.lamieraVisual.innerHTML = ''; // Clear previous targets
+            sagomaturaState.targets = []; // Reset targets for the current session
+            ui.sagomaturaMinigame.style.display = 'block';
             ui.cutsRemainingDisplay.textContent = sagomaturaState.totalCuts;
             ui.confirmCutsBtn.style.display = 'none';
 
+            const lamieraWidthPx = ui.lamieraVisual.offsetWidth;
+            const lamieraHeightPx = ui.lamieraVisual.offsetHeight;
+
+            if (lamieraWidthPx === 0 || lamieraHeightPx === 0) {
+                console.warn("Sagomatura Minigame: Lamiera visual dimensions are zero. Overlap detection may be inaccurate.");
+            }
+
+            function checkOverlap(rect1, rect2) {
+                const margin = 3; // px margin to prevent visual touching
+                // If a rectangle has no area (e.g., if lamiera dimensions were 0 leading to 0 width/height),
+                // it effectively doesn't cause a visual overlap problem.
+                if (rect1.width <= 0 || rect1.height <= 0 || rect2.width <= 0 || rect2.height <= 0) {
+                    return false;
+                }
+                return rect1.x < rect2.x + rect2.width + margin &&
+                       rect1.x + rect1.width + margin > rect2.x &&
+                       rect1.y < rect2.y + rect2.height + margin &&
+                       rect1.y + rect1.height + margin > rect2.y;
+            }
+
             for (let i = 0; i < sagomaturaState.totalCuts; i++) {
-                const target = document.createElement('div');
-                target.classList.add('cut-target');
-                target.style.left = `${Math.random() * 80 + 5}%`; // Random position within bounds
-                target.style.top = `${Math.random() * 70 + 10}%`;
-                target.style.width = `${Math.random() * 10 + 10}%`; // Random size
-                target.style.height = `${Math.random() * 10 + 10}%`;
-                target.dataset.cutId = i;
-                target.addEventListener('click', handleCutTargetClick);
-                ui.lamieraVisual.appendChild(target);
-                sagomaturaState.targets.push(target);
+                const targetElement = document.createElement('div');
+                targetElement.classList.add('cut-target');
+                targetElement.dataset.cutId = i;
+                targetElement.addEventListener('click', handleCutTargetClick);
+
+                let currentTargetRectPx;
+                let xPercentTry, yPercentTry, wPercentTry, hPercentTry;
+                let attempts = 0;
+                const maxAttempts = 30; // Number of tries to place a target without overlap
+
+                while (attempts < maxAttempts) {
+                    // Generate random dimensions and positions in percentages
+                    wPercentTry = Math.random() * 12 + 8; // Target width: 8% to 20%
+                    hPercentTry = Math.random() * 12 + 8; // Target height: 8% to 20%
+
+                    // Position percentages ensuring the element stays fully within bounds (1% margin from edges)
+                    xPercentTry = Math.random() * (100 - wPercentTry - 2) + 1;
+                    yPercentTry = Math.random() * (100 - hPercentTry - 2) + 1;
+
+                    // Convert percentages to pixel values for collision detection
+                    if (lamieraWidthPx > 0 && lamieraHeightPx > 0) {
+                         currentTargetRectPx = {
+                            x: (xPercentTry / 100) * lamieraWidthPx,
+                            y: (yPercentTry / 100) * lamieraHeightPx,
+                            width: (wPercentTry / 100) * lamieraWidthPx,
+                            height: (hPercentTry / 100) * lamieraHeightPx
+                        };
+                    } else {
+                        // Fallback: if lamiera dimensions are unavailable, use percentages directly.
+                        currentTargetRectPx = {
+                            x: xPercentTry, y: yPercentTry,
+                            width: wPercentTry, height: hPercentTry
+                        };
+                    }
+
+                    let overlaps = false;
+                    for (const existingTarget of sagomaturaState.targets) {
+                        if (checkOverlap(currentTargetRectPx, existingTarget.rectPx)) {
+                            overlaps = true;
+                            break;
+                        }
+                    }
+
+                    if (!overlaps) {
+                        break; // Found a suitable position
+                    }
+                    attempts++;
+                }
+
+                if (attempts >= maxAttempts) {
+                    console.warn(`Sagomatura Minigame: Target ${i} might overlap after ${maxAttempts} placement attempts.`);
+                }
+
+                // Apply styles using the accepted percentage values
+                targetElement.style.left = `${xPercentTry}%`;
+                targetElement.style.top = `${yPercentTry}%`;
+                targetElement.style.width = `${wPercentTry}%`;
+                targetElement.style.height = `${hPercentTry}%`;
+
+                ui.lamieraVisual.appendChild(targetElement);
+                sagomaturaState.targets.push({ element: targetElement, rectPx: currentTargetRectPx });
             }
              // Disable other game interactions during minigame
             document.querySelectorAll('.task-btn, #order-materials-btn, #confirm-planning-btn, #deliver-ship-btn, .tab-button').forEach(btn => btn.disabled = true);
@@ -1103,6 +1572,1311 @@
             updateTaskButtonsAvailability();
         });
 
+        // --- ELECTRICAL MINIGAME LOGIC ---
+        function startElectricalMinigame() {
+            gameState.electricalMinigameState.active = true;
+            gameState.electricalMinigameState.playerSequence = [];
+            gameState.electricalMinigameState.sequence = generateElectricalSequence(gameState.electricalMinigameState.level);
+
+            ui.electricalMinigameArea.style.display = 'block';
+            ui.electricalMinigameStatus.textContent = 'Memorizza la sequenza...';
+            ui.electricalSequenceDisplay.innerHTML = ''; // Clear previous
+
+            // Display sequence visually
+            gameState.electricalMinigameState.sequence.forEach((color, index) => {
+                const colorBlock = document.createElement('div');
+                colorBlock.style.width = '20px';
+                colorBlock.style.height = '20px';
+                colorBlock.style.backgroundColor = color;
+                colorBlock.style.display = 'inline-block';
+                colorBlock.style.margin = '2px';
+                colorBlock.style.opacity = '0'; // Start hidden
+                ui.electricalSequenceDisplay.appendChild(colorBlock);
+                // Reveal sequence one by one
+                setTimeout(() => { colorBlock.style.opacity = '1'; }, (index + 1) * 600);
+            });
+
+            // Hide sequence after a delay and allow player input
+            setTimeout(() => {
+                ui.electricalMinigameStatus.textContent = 'Ripeti la sequenza!';
+                ui.electricalSequenceDisplay.innerHTML = ''; // Hide the sequence
+                ui.electricalWiresClickable.querySelectorAll('.wire-btn').forEach(btn => btn.disabled = false);
+            }, (gameState.electricalMinigameState.level + 1) * 700);
+
+            ui.confirmElectricalSequenceBtn.style.display = 'none';
+            const electricalTaskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="electrical"]');
+            if (electricalTaskButton) electricalTaskButton.disabled = true; // Disable main task button during minigame
+        }
+
+        function generateElectricalSequence(length) {
+            const colors = ['red', 'blue', 'green', 'yellow'];
+            const sequence = [];
+            for (let i = 0; i < length; i++) {
+                sequence.push(colors[Math.floor(Math.random() * colors.length)]);
+            }
+            return sequence;
+        }
+
+        function handleWireClick(event) {
+            if (!gameState.electricalMinigameState.active) return;
+            const color = event.target.dataset.color;
+            gameState.electricalMinigameState.playerSequence.push(color);
+
+            const clickedWireDisplay = document.createElement('div');
+            clickedWireDisplay.style.width = '15px';
+            clickedWireDisplay.style.height = '15px';
+            clickedWireDisplay.style.backgroundColor = color;
+            clickedWireDisplay.style.display = 'inline-block';
+            clickedWireDisplay.style.margin = '2px';
+            ui.electricalSequenceDisplay.appendChild(clickedWireDisplay);
+
+            if (gameState.electricalMinigameState.playerSequence.length === gameState.electricalMinigameState.sequence.length) {
+                ui.electricalWiresClickable.querySelectorAll('.wire-btn').forEach(btn => btn.disabled = true);
+                checkElectricalSequence();
+            }
+        }
+
+        function checkElectricalSequence() {
+            let correct = true;
+            for (let i = 0; i < gameState.electricalMinigameState.sequence.length; i++) {
+                if (gameState.electricalMinigameState.sequence[i] !== gameState.electricalMinigameState.playerSequence[i]) {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (correct) {
+                ui.electricalMinigameStatus.textContent = 'Corretto! Livello successivo...';
+                gameState.electricalMinigameState.level++;
+                if (gameState.electricalMinigameState.level > gameState.electricalMinigameState.maxLevel) {
+                    ui.electricalMinigameStatus.textContent = 'Ottimo lavoro! Cablaggio completato!';
+                    completeElectricalMinigame(true);
+                } else {
+                    setTimeout(startElectricalMinigame, 1500);
+                }
+            } else {
+                ui.electricalMinigameStatus.textContent = 'Errore! Prova di nuovo questo livello.';
+                gameState.shipQuality -= 1;
+                setTimeout(startElectricalMinigame, 2000);
+            }
+            updateUI();
+        }
+
+        function completeElectricalMinigame(success) {
+            gameState.electricalMinigameState.active = false;
+            ui.electricalMinigameArea.style.display = 'none';
+
+            const electricalTaskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="electrical"]');
+            // This button will be re-enabled by updateTaskButtonsAvailability or handled by startTask disabling everything
+
+            if (success) {
+                gameState.shipQuality += 3;
+                ui.outfittingFeedback.textContent = "Mini-gioco Cablaggio completato con successo! Qualità migliorata.";
+                ui.outfittingFeedback.style.color = COLORS.success;
+                ui.outfittingFeedback.style.display = 'block';
+
+                const task = gameState.phases.outfitting.tasks.electrical;
+                const buttonElement = electricalTaskButton;
+                const statusElement = buttonElement.nextElementSibling;
+
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per avviare il compito Impianti Elettrici dopo il minigioco!");
+                    if (electricalTaskButton) electricalTaskButton.disabled = false; // Re-enable if cannot start
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 5;
+                task.currentDuration = Math.max(1, actualDuration); // Reduced duration due to minigame success
+
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'electrical', buttonElement, statusElement), ui.outfittingFeedback, true);
+
+            } else {
+                // This path (success=false) might not be typically hit if the game loops on error.
+                ui.outfittingFeedback.textContent = "Mini-gioco Cablaggio non completato. Puoi riprovare.";
+                ui.outfittingFeedback.style.color = COLORS.warning;
+                ui.outfittingFeedback.style.display = 'block';
+                if (electricalTaskButton) electricalTaskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END ELECTRICAL MINIGAME LOGIC ---
+
+        // --- ASSEMBLE BLOCK 1 MINIGAME LOGIC ---
+        function startAssembleBlock1Minigame() {
+            gameState.assembleBlock1MinigameState.active = true;
+            gameState.assembleBlock1MinigameState.piecesInPlace = 0;
+            ui.assembleBlock1MinigameArea.style.display = 'block';
+            ui.assembleBlock1MinigameStatus.textContent = 'Trascina i componenti nelle loro posizioni.';
+
+            // Reset pieces and zones visually
+            ui.block1ComponentsArea.querySelectorAll('.draggable-piece').forEach(piece => {
+                piece.style.opacity = '1';
+                piece.draggable = true;
+                if (piece.parentElement !== ui.block1ComponentsArea) {
+                    ui.block1ComponentsArea.appendChild(piece);
+                }
+            });
+            ui.block1PuzzleArea.querySelectorAll('.drop-zone').forEach(zone => {
+                zone.innerHTML = '';
+                zone.style.backgroundColor = '#d0d0d0';
+            });
+
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_1"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function handleDragStart(event) {
+            if (!gameState.assembleBlock1MinigameState.active) return;
+            event.dataTransfer.setData('text/plain', event.target.dataset.pieceid);
+            event.target.style.opacity = '0.7';
+        }
+
+        function handleDragOver(event) {
+            if (!gameState.assembleBlock1MinigameState.active) return;
+            event.preventDefault();
+        }
+
+        function handleDrop(event) {
+            if (!gameState.assembleBlock1MinigameState.active) return;
+            event.preventDefault();
+            const pieceId = event.dataTransfer.getData('text/plain');
+            const pieceElement = ui.block1ComponentsArea.querySelector(`.draggable-piece[data-pieceid="${pieceId}"]`) || ui.block1PuzzleArea.querySelector(`.draggable-piece[data-pieceid="${pieceId}"]`); // Check both areas
+            const zoneElement = event.target.closest('.drop-zone');
+
+            if (pieceElement && zoneElement) {
+                const zoneId = zoneElement.dataset.zoneid;
+                if (gameState.assembleBlock1MinigameState.correctPlacements[pieceId] === zoneId && zoneElement.children.length === 0) {
+                    zoneElement.appendChild(pieceElement);
+                    pieceElement.style.opacity = '1';
+                    pieceElement.draggable = false;
+                    zoneElement.style.backgroundColor = 'lightgreen';
+                    gameState.assembleBlock1MinigameState.piecesInPlace++;
+                    ui.assembleBlock1MinigameStatus.textContent = `Componente ${pieceId} posizionato!`;
+
+                    if (gameState.assembleBlock1MinigameState.piecesInPlace === gameState.assembleBlock1MinigameState.totalPieces) {
+                        completeAssembleBlock1Minigame(true);
+                    }
+                } else {
+                    ui.assembleBlock1MinigameStatus.textContent = 'Posizione errata o zona occupata!';
+                    if(pieceElement) pieceElement.style.opacity = '1';
+                }
+            } else {
+                if(pieceElement) pieceElement.style.opacity = '1';
+            }
+        }
+
+        function completeAssembleBlock1Minigame(success) {
+            gameState.assembleBlock1MinigameState.active = false;
+            ui.assembleBlock1MinigameArea.style.display = 'none';
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_1"]');
+
+            if (success) {
+                gameState.shipQuality += 2;
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Blocco 1 completato! Qualità migliorata.";
+                ui.hullFeedback.style.color = COLORS.success;
+                ui.hullFeedback.style.display = 'block';
+
+                const task = gameState.phases.hull.tasks.assemble_block_1;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Assembla Blocco 1 dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 3;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'assemble_block_1', taskButton, statusElement), ui.hullFeedback, true);
+            } else {
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Blocco 1 non completato. Puoi riprovare.";
+                ui.hullFeedback.style.color = COLORS.warning;
+                ui.hullFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END ASSEMBLE BLOCK 1 MINIGAME LOGIC ---
+
+        // --- ASSEMBLE BLOCK 2 MINIGAME LOGIC ---
+        function startAssembleBlock2Minigame() {
+            gameState.assembleBlock2MinigameState.active = true;
+            gameState.assembleBlock2MinigameState.piecesInPlace = 0;
+            ui.assembleBlock2MinigameArea.style.display = 'block';
+            ui.assembleBlock2MinigameStatus.textContent = 'Trascina i componenti nelle loro posizioni.';
+
+            ui.block2ComponentsArea.querySelectorAll('.draggable-piece-b2').forEach(piece => {
+                piece.style.opacity = '1';
+                piece.draggable = true;
+                if (piece.parentElement !== ui.block2ComponentsArea) {
+                    ui.block2ComponentsArea.appendChild(piece);
+                }
+            });
+            ui.block2PuzzleArea.querySelectorAll('.drop-zone-b2').forEach(zone => {
+                zone.innerHTML = '';
+                zone.style.backgroundColor = '#c8c8c8';
+            });
+
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_2"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        // Reusing handleDragStart and handleDragOver from Block 1 minigame
+
+        function handleDropBlock2(event) {
+            if (!gameState.assembleBlock2MinigameState.active) return;
+            event.preventDefault();
+            const pieceId = event.dataTransfer.getData('text/plain');
+            const pieceElement = ui.block2ComponentsArea.querySelector(`.draggable-piece-b2[data-pieceid="${pieceId}"]`) || ui.block2PuzzleArea.querySelector(`.draggable-piece-b2[data-pieceid="${pieceId}"]`);
+            const zoneElement = event.target.closest('.drop-zone-b2');
+
+            if (pieceElement && zoneElement) {
+                const zoneId = zoneElement.dataset.zoneid;
+                if (gameState.assembleBlock2MinigameState.correctPlacements[pieceId] === zoneId && zoneElement.children.length === 0) {
+                    zoneElement.appendChild(pieceElement);
+                    pieceElement.style.opacity = '1';
+                    pieceElement.draggable = false;
+                    zoneElement.style.backgroundColor = 'lightgreen';
+                    gameState.assembleBlock2MinigameState.piecesInPlace++;
+                    ui.assembleBlock2MinigameStatus.textContent = `Componente ${pieceId.replace('b2-','')} posizionato!`;
+
+                    if (gameState.assembleBlock2MinigameState.piecesInPlace === gameState.assembleBlock2MinigameState.totalPieces) {
+                        completeAssembleBlock2Minigame(true);
+                    }
+                } else {
+                    ui.assembleBlock2MinigameStatus.textContent = 'Posizione errata o zona occupata!';
+                    if(pieceElement) pieceElement.style.opacity = '1';
+                }
+            } else {
+                if(pieceElement) pieceElement.style.opacity = '1';
+            }
+        }
+
+        function completeAssembleBlock2Minigame(success) {
+            gameState.assembleBlock2MinigameState.active = false;
+            ui.assembleBlock2MinigameArea.style.display = 'none';
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_2"]');
+
+            if (success) {
+                gameState.shipQuality += 2;
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Blocco 2 completato! Qualità migliorata.";
+                ui.hullFeedback.style.color = COLORS.success;
+                ui.hullFeedback.style.display = 'block';
+
+                const task = gameState.phases.hull.tasks.assemble_block_2;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Assembla Blocco 2 dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI(); // Ensure UI reflects button re-enabling
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 3;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'assemble_block_2', taskButton, statusElement), ui.hullFeedback, true);
+            } else {
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Blocco 2 non completato. Puoi riprovare.";
+                ui.hullFeedback.style.color = COLORS.warning;
+                ui.hullFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END ASSEMBLE BLOCK 2 MINIGAME LOGIC ---
+
+        // --- FLIP BLOCKS MINIGAME LOGIC ---
+        function startFlipBlocksMinigame() {
+            gameState.flipBlocksMinigameState.active = true;
+            gameState.flipBlocksMinigameState.playerSequence = [];
+            gameState.flipBlocksMinigameState.currentLevel = 0;
+            generateFlipBlocksSequence();
+
+            ui.flipBlocksMinigameArea.style.display = 'block';
+            ui.flipBlocksSequenceDisplay.innerHTML = '';
+            ui.flipBlocksMinigameStatus.textContent = 'Memorizza la sequenza...';
+
+            ui.flipBlocksControls.querySelectorAll('.crane-btn').forEach(btn => btn.disabled = true);
+
+            gameState.flipBlocksMinigameState.sequence.forEach((craneId, index) => {
+                setTimeout(() => {
+                    const btnToHighlight = ui.flipBlocksControls.querySelector(`.crane-btn[data-craneid="${craneId}"]`);
+                    if (btnToHighlight) {
+                        const originalColor = btnToHighlight.style.backgroundColor;
+                        btnToHighlight.style.backgroundColor = 'yellow';
+                        const craneName = btnToHighlight.textContent;
+                        const seqItem = document.createElement('span');
+                        seqItem.textContent = craneName + (index < gameState.flipBlocksMinigameState.sequence.length - 1 ? ' -> ' : '');
+                        seqItem.style.margin = "0 5px";
+                        ui.flipBlocksSequenceDisplay.appendChild(seqItem);
+
+                        setTimeout(() => {
+                            btnToHighlight.style.backgroundColor = originalColor;
+                        }, 400);
+                    }
+                }, (index + 1) * 700);
+            });
+
+            const totalSequenceDisplayTime = (gameState.flipBlocksMinigameState.sequence.length + 1) * 700;
+            setTimeout(() => {
+                ui.flipBlocksMinigameStatus.textContent = 'Ripeti la sequenza!';
+                ui.flipBlocksControls.querySelectorAll('.crane-btn').forEach(btn => btn.disabled = false);
+            }, totalSequenceDisplayTime);
+
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="flip_blocks"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function generateFlipBlocksSequence() {
+            gameState.flipBlocksMinigameState.sequence = [];
+            const available = gameState.flipBlocksMinigameState.availableCranes;
+            for (let i = 0; i < gameState.flipBlocksMinigameState.sequenceLength; i++) {
+                const randomIndex = Math.floor(Math.random() * available.length);
+                gameState.flipBlocksMinigameState.sequence.push(available[randomIndex]);
+            }
+        }
+
+        function handleCraneClick(event) {
+            if (!gameState.flipBlocksMinigameState.active) return;
+            const clickedCraneId = event.target.dataset.craneid;
+            if (!clickedCraneId) return;
+
+            gameState.flipBlocksMinigameState.playerSequence.push(clickedCraneId);
+
+            event.target.style.transform = 'scale(0.95)';
+            setTimeout(() => event.target.style.transform = 'scale(1)', 100);
+
+            ui.flipBlocksMinigameStatus.textContent = `Hai cliccato: ${event.target.textContent}. Ancora ${gameState.flipBlocksMinigameState.sequence.length - gameState.flipBlocksMinigameState.playerSequence.length} attivazioni.`;
+
+            if (gameState.flipBlocksMinigameState.playerSequence.length === gameState.flipBlocksMinigameState.sequence.length) {
+                checkFlipBlocksSequence();
+            }
+        }
+
+        function checkFlipBlocksSequence() {
+            let correct = true;
+            for (let i = 0; i < gameState.flipBlocksMinigameState.sequence.length; i++) {
+                if (gameState.flipBlocksMinigameState.sequence[i] !== gameState.flipBlocksMinigameState.playerSequence[i]) {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (correct) {
+                ui.flipBlocksMinigameStatus.textContent = 'Sequenza corretta! Blocchi capovolti.';
+                completeFlipBlocksMinigame(true);
+            } else {
+                ui.flipBlocksMinigameStatus.textContent = 'Errore nella sequenza! Riprova.';
+                gameState.shipQuality -= 1;
+                gameState.flipBlocksMinigameState.playerSequence = []; // Clear player input for retry
+
+                setTimeout(() => {
+                    ui.flipBlocksMinigameStatus.textContent = 'Memorizza la sequenza... (Riprova)';
+                    ui.flipBlocksSequenceDisplay.innerHTML = '';
+                    gameState.flipBlocksMinigameState.sequence.forEach((craneId, index) => {
+                        const btnToHighlight = ui.flipBlocksControls.querySelector(`.crane-btn[data-craneid="${craneId}"]`);
+                        const craneName = btnToHighlight ? btnToHighlight.textContent : craneId;
+                        const seqItem = document.createElement('span');
+                        seqItem.textContent = craneName + (index < gameState.flipBlocksMinigameState.sequence.length - 1 ? ' -> ' : '');
+                        seqItem.style.margin = "0 5px";
+                        ui.flipBlocksSequenceDisplay.appendChild(seqItem);
+                    });
+                    ui.flipBlocksControls.querySelectorAll('.crane-btn').forEach(btn => btn.disabled = false);
+                }, 2000);
+            }
+            updateUI();
+        }
+
+        function completeFlipBlocksMinigame(success) {
+            gameState.flipBlocksMinigameState.active = false;
+            ui.flipBlocksMinigameArea.style.display = 'none';
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="flip_blocks"]');
+
+            if (success) {
+                gameState.shipQuality += 3;
+                ui.hullFeedback.textContent = "Mini-gioco Capovolgi Blocchi completato! Qualità migliorata.";
+                ui.hullFeedback.style.color = COLORS.success;
+                ui.hullFeedback.style.display = 'block';
+
+                const task = gameState.phases.hull.tasks.flip_blocks;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Capovolgi Blocchi dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 2;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'flip_blocks', taskButton, statusElement), ui.hullFeedback, true);
+            } else {
+                ui.hullFeedback.textContent = "Mini-gioco Capovolgi Blocchi non completato. Puoi riprovare.";
+                ui.hullFeedback.style.color = COLORS.warning;
+                ui.hullFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END FLIP BLOCKS MINIGAME LOGIC ---
+
+        // --- ASSEMBLE PRUA MINIGAME LOGIC ---
+        function startAssemblePruaMinigame() {
+            gameState.assemblePruaMinigameState.active = true;
+            gameState.assemblePruaMinigameState.playerSequence = [];
+            generatePruaWeldSequence();
+
+            ui.assemblePruaMinigameArea.style.display = 'block';
+            ui.assemblePruaMinigameStatus.textContent = 'Memorizza la sequenza di saldatura...';
+
+            ui.pruaSchematicArea.querySelectorAll('.weld-point').forEach(wp => wp.style.pointerEvents = 'none');
+
+            let delay = 0;
+            gameState.assemblePruaMinigameState.sequence.forEach((pointId, index) => {
+                setTimeout(() => {
+                    const pointElement = ui.pruaSchematicArea.querySelector(`.weld-point[data-pointid="${pointId}"]`);
+                    if (pointElement) {
+                        const originalColor = pointElement.style.backgroundColor;
+                        pointElement.style.backgroundColor = 'yellow';
+                        pointElement.style.transform = 'scale(1.5)';
+                        setTimeout(() => {
+                            pointElement.style.backgroundColor = 'red'; // Revert to original red
+                            pointElement.style.transform = 'scale(1)';
+                        }, gameState.assemblePruaMinigameState.highlightDuration);
+                    }
+                }, delay);
+                delay += gameState.assemblePruaMinigameState.highlightDuration + gameState.assemblePruaMinigameState.pauseBetweenHighlights;
+            });
+
+            setTimeout(() => {
+                ui.assemblePruaMinigameStatus.textContent = 'Ripeti la sequenza cliccando i punti!';
+                ui.pruaSchematicArea.querySelectorAll('.weld-point').forEach(wp => wp.style.pointerEvents = 'auto');
+            }, delay);
+
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_prua"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function generatePruaWeldSequence() {
+            gameState.assemblePruaMinigameState.sequence = [];
+            const availablePoints = [...gameState.assemblePruaMinigameState.weldPoints];
+            for (let i = 0; i < gameState.assemblePruaMinigameState.sequenceLength; i++) {
+                if (availablePoints.length === 0) break;
+                const randomIndex = Math.floor(Math.random() * availablePoints.length);
+                gameState.assemblePruaMinigameState.sequence.push(availablePoints[randomIndex]);
+            }
+        }
+
+        function handleWeldPointClick(event) {
+            if (!gameState.assemblePruaMinigameState.active) return;
+            const clickedPointId = event.target.dataset.pointid;
+            if (!clickedPointId) return;
+
+            gameState.assemblePruaMinigameState.playerSequence.push(clickedPointId);
+
+            event.target.style.backgroundColor = 'lime';
+            setTimeout(() => event.target.style.backgroundColor = 'red', 200);
+
+            ui.assemblePruaMinigameStatus.textContent = `Punto ${clickedPointId} saldato. Rimanenti: ${gameState.assemblePruaMinigameState.sequence.length - gameState.assemblePruaMinigameState.playerSequence.length}`;
+
+            if (gameState.assemblePruaMinigameState.playerSequence.length === gameState.assemblePruaMinigameState.sequence.length) {
+                checkPruaSequence();
+            }
+        }
+
+        function checkPruaSequence() {
+            let correct = true;
+            for (let i = 0; i < gameState.assemblePruaMinigameState.sequence.length; i++) {
+                if (gameState.assemblePruaMinigameState.sequence[i] !== gameState.assemblePruaMinigameState.playerSequence[i]) {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (correct) {
+                ui.assemblePruaMinigameStatus.textContent = 'Sequenza di saldatura corretta! Prua assemblata.';
+                completeAssemblePruaMinigame(true);
+            } else {
+                ui.assemblePruaMinigameStatus.textContent = 'Errore nella sequenza di saldatura! Riprova il minigioco.';
+                gameState.shipQuality -= 1;
+                setTimeout(() => {
+                    startAssemblePruaMinigame();
+                }, 2000);
+            }
+            updateUI();
+        }
+
+        function completeAssemblePruaMinigame(success) {
+            gameState.assemblePruaMinigameState.active = false;
+            ui.assemblePruaMinigameArea.style.display = 'none';
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_prua"]');
+
+            if (success) {
+                gameState.shipQuality += 3;
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Prua completato! Qualità migliorata.";
+                ui.hullFeedback.style.color = COLORS.success;
+                ui.hullFeedback.style.display = 'block';
+
+                const task = gameState.phases.hull.tasks.assemble_block_prua;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Assembla Prua dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 4;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'assemble_block_prua', taskButton, statusElement), ui.hullFeedback, true);
+            } else {
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Prua non completato. Puoi riprovare.";
+                ui.hullFeedback.style.color = COLORS.warning;
+                ui.hullFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END ASSEMBLE PRUA MINIGAME LOGIC ---
+
+        // --- ASSEMBLE POPPA MINIGAME LOGIC ---
+        function startAssemblePoppaMinigame() {
+            gameState.assemblePoppaMinigameState.active = true;
+            gameState.assemblePoppaMinigameState.playerSequence = [];
+            generatePoppaWeldSequence();
+
+            ui.assemblePoppaMinigameArea.style.display = 'block';
+            ui.assemblePoppaMinigameStatus.textContent = 'Memorizza la sequenza di saldatura Poppa...';
+
+            ui.poppaSchematicArea.querySelectorAll('.weld-point-poppa').forEach(wp => wp.style.pointerEvents = 'none');
+
+            let delay = 0;
+            gameState.assemblePoppaMinigameState.sequence.forEach((pointId) => {
+                setTimeout(() => {
+                    const pointElement = ui.poppaSchematicArea.querySelector(`.weld-point-poppa[data-pointid="${pointId}"]`);
+                    if (pointElement) {
+                        const originalColor = pointElement.style.backgroundColor;
+                        pointElement.style.backgroundColor = 'orange';
+                        pointElement.style.transform = 'scale(1.5)';
+                        setTimeout(() => {
+                            pointElement.style.backgroundColor = originalColor;
+                            pointElement.style.transform = 'scale(1)';
+                        }, gameState.assemblePoppaMinigameState.highlightDuration);
+                    }
+                }, delay);
+                delay += gameState.assemblePoppaMinigameState.highlightDuration + gameState.assemblePoppaMinigameState.pauseBetweenHighlights;
+            });
+
+            setTimeout(() => {
+                ui.assemblePoppaMinigameStatus.textContent = 'Ripeti la sequenza cliccando i punti!';
+                ui.poppaSchematicArea.querySelectorAll('.weld-point-poppa').forEach(wp => wp.style.pointerEvents = 'auto');
+            }, delay);
+
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_poppa"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function generatePoppaWeldSequence() {
+            gameState.assemblePoppaMinigameState.sequence = [];
+            const availablePoints = [...gameState.assemblePoppaMinigameState.weldPoints];
+            for (let i = 0; i < gameState.assemblePoppaMinigameState.sequenceLength; i++) {
+                if (availablePoints.length === 0) break;
+                const randomIndex = Math.floor(Math.random() * availablePoints.length);
+                gameState.assemblePoppaMinigameState.sequence.push(availablePoints[randomIndex]);
+            }
+        }
+
+        function handleWeldPointClickPoppa(event) {
+            if (!gameState.assemblePoppaMinigameState.active) return;
+            const clickedPointId = event.target.dataset.pointid;
+            if (!clickedPointId || !event.target.classList.contains('weld-point-poppa')) return;
+
+            gameState.assemblePoppaMinigameState.playerSequence.push(clickedPointId);
+
+            event.target.style.backgroundColor = '#32cd32';
+            setTimeout(() => event.target.style.backgroundColor = 'darkblue', 200);
+
+            ui.assemblePoppaMinigameStatus.textContent = `Punto ${clickedPointId} saldato. Rimanenti: ${gameState.assemblePoppaMinigameState.sequence.length - gameState.assemblePoppaMinigameState.playerSequence.length}`;
+
+            if (gameState.assemblePoppaMinigameState.playerSequence.length === gameState.assemblePoppaMinigameState.sequence.length) {
+                checkPoppaSequence();
+            }
+        }
+
+        function checkPoppaSequence() {
+            let correct = true;
+            for (let i = 0; i < gameState.assemblePoppaMinigameState.sequence.length; i++) {
+                if (gameState.assemblePoppaMinigameState.sequence[i] !== gameState.assemblePoppaMinigameState.playerSequence[i]) {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (correct) {
+                ui.assemblePoppaMinigameStatus.textContent = 'Sequenza di saldatura Poppa corretta! Poppa assemblata.';
+                completeAssemblePoppaMinigame(true);
+            } else {
+                ui.assemblePoppaMinigameStatus.textContent = 'Errore nella sequenza di saldatura Poppa! Riprova.';
+                gameState.shipQuality -= 1;
+                setTimeout(() => {
+                    startAssemblePoppaMinigame();
+                }, 2000);
+            }
+            updateUI();
+        }
+
+        function completeAssemblePoppaMinigame(success) {
+            gameState.assemblePoppaMinigameState.active = false;
+            ui.assemblePoppaMinigameArea.style.display = 'none';
+            const taskButton = ui.hullTasksUI.querySelector('.task-btn[data-task="assemble_block_poppa"]');
+
+            if (success) {
+                gameState.shipQuality += 3;
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Poppa completato! Qualità migliorata.";
+                ui.hullFeedback.style.color = COLORS.success;
+                ui.hullFeedback.style.display = 'block';
+
+                const task = gameState.phases.hull.tasks.assemble_block_poppa;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Assembla Poppa dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 4;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'assemble_block_poppa', taskButton, statusElement), ui.hullFeedback, true);
+            } else {
+                ui.hullFeedback.textContent = "Mini-gioco Assembla Poppa non completato. Puoi riprovare.";
+                ui.hullFeedback.style.color = COLORS.warning;
+                ui.hullFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END ASSEMBLE POPPA MINIGAME LOGIC ---
+
+        // --- HVAC MINIGAME LOGIC ---
+        function startHvacMinigame() {
+            gameState.hvacMinigameState.active = true;
+            gameState.hvacMinigameState.valves = [];
+            ui.hvacValveArea.innerHTML = '';
+            let initiallyClosedCount = 0;
+
+            for (let i = 0; i < gameState.hvacMinigameState.totalValves; i++) {
+                const isOpenInitially = Math.random() > 0.5;
+                if (!isOpenInitially) {
+                    initiallyClosedCount++;
+                }
+                const valveState = { id: `valve${i}`, isOpen: isOpenInitially };
+                gameState.hvacMinigameState.valves.push(valveState);
+
+                const valveElement = document.createElement('div');
+                valveElement.classList.add('hvac-valve');
+                valveElement.dataset.valveid = valveState.id;
+                valveElement.style.width = '50px';
+                valveElement.style.height = '50px';
+                valveElement.style.borderRadius = '50%';
+                valveElement.style.margin = '10px';
+                valveElement.style.cursor = 'pointer';
+                valveElement.style.border = '2px solid #333';
+                valveElement.style.textAlign = 'center';
+                valveElement.style.lineHeight = '50px';
+                valveElement.textContent = `V${i+1}`;
+                updateValveAppearance(valveElement, valveState.isOpen);
+                valveElement.addEventListener('click', handleValveClick);
+                ui.hvacValveArea.appendChild(valveElement);
+            }
+
+            gameState.hvacMinigameState.openValvesNeeded = gameState.hvacMinigameState.totalValves;
+            if (initiallyClosedCount === 0 && gameState.hvacMinigameState.totalValves > 0) {
+               const randomValve = gameState.hvacMinigameState.valves[Math.floor(Math.random() * gameState.hvacMinigameState.totalValves)];
+               randomValve.isOpen = false;
+               updateValveAppearance(ui.hvacValveArea.querySelector(`.hvac-valve[data-valveid="${randomValve.id}"]`), false);
+               initiallyClosedCount = 1;
+            }
+            if (initiallyClosedCount === 0 && gameState.hvacMinigameState.totalValves > 0) {
+                completeHvacMinigame(true);
+                return;
+            }
+
+            ui.hvacMinigameArea.style.display = 'block';
+            ui.hvacMinigameStatus.textContent = `Apri tutte le ${initiallyClosedCount} valvole rosse.`;
+
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="hvac"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function updateValveAppearance(element, isOpen) {
+            if (isOpen) {
+                element.style.backgroundColor = 'lightgreen';
+                element.style.borderColor = 'darkgreen';
+            } else {
+                element.style.backgroundColor = 'salmon';
+                element.style.borderColor = 'darkred';
+            }
+        }
+
+        function handleValveClick(event) {
+            if (!gameState.hvacMinigameState.active) return;
+            const valveId = event.target.dataset.valveid;
+            const valve = gameState.hvacMinigameState.valves.find(v => v.id === valveId);
+
+            if (valve) {
+                valve.isOpen = !valve.isOpen;
+                updateValveAppearance(event.target, valve.isOpen);
+                checkHvacCompletion();
+            }
+        }
+
+        function checkHvacCompletion() {
+            const allOpen = gameState.hvacMinigameState.valves.every(v => v.isOpen);
+            if (allOpen) {
+                ui.hvacMinigameStatus.textContent = 'Tutte le valvole aperte! Sistema HVAC attivato.';
+                completeHvacMinigame(true);
+            } else {
+                const openCount = gameState.hvacMinigameState.valves.filter(v => v.isOpen).length;
+                const needed = gameState.hvacMinigameState.totalValves - openCount;
+                ui.hvacMinigameStatus.textContent = `Ancora ${needed} valvol${needed === 1 ? 'a' : 'e'} da aprire.`;
+            }
+        }
+
+        function completeHvacMinigame(success) {
+            gameState.hvacMinigameState.active = false;
+            ui.hvacMinigameArea.style.display = 'none';
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="hvac"]');
+
+            if (success) {
+                gameState.shipQuality += 2;
+                ui.outfittingFeedback.textContent = "Mini-gioco HVAC completato! Qualità migliorata.";
+                ui.outfittingFeedback.style.color = COLORS.success;
+                ui.outfittingFeedback.style.display = 'block';
+
+                const task = gameState.phases.outfitting.tasks.hvac;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Sistemi HVAC dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 3;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'hvac', taskButton, statusElement), ui.outfittingFeedback, true);
+            } else {
+                ui.outfittingFeedback.textContent = "Mini-gioco HVAC non completato. Puoi riprovare.";
+                ui.outfittingFeedback.style.color = COLORS.warning;
+                ui.outfittingFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END HVAC MINIGAME LOGIC ---
+
+        // --- ENGINES MINIGAME LOGIC ---
+        function startEnginesMinigame() {
+            gameState.enginesMinigameState.active = true;
+            gameState.enginesMinigameState.playerSequence = [];
+            generateEnginesBoltSequence();
+
+            ui.enginesMinigameArea.style.display = 'block';
+            ui.enginesMinigameStatus.textContent = 'Memorizza la sequenza di serraggio...';
+
+            ui.engineSchematicArea.querySelectorAll('.engine-bolt').forEach(bolt => {
+               bolt.style.pointerEvents = 'none';
+               bolt.style.backgroundColor = 'gray';
+               bolt.style.transform = 'rotate(0deg) scale(1)'; // Reset visual state
+            });
+
+            let delay = 0;
+            gameState.enginesMinigameState.sequence.forEach((boltId) => {
+                setTimeout(() => {
+                    const boltElement = ui.engineSchematicArea.querySelector(`.engine-bolt[data-boltid="${boltId}"]`);
+                    if (boltElement) {
+                        const originalColor = boltElement.style.backgroundColor;
+                        boltElement.style.backgroundColor = 'gold';
+                        boltElement.style.transform = 'rotate(45deg) scale(1.2)';
+                        setTimeout(() => {
+                            boltElement.style.backgroundColor = originalColor;
+                            boltElement.style.transform = 'rotate(0deg) scale(1)';
+                        }, gameState.enginesMinigameState.highlightDuration);
+                    }
+                }, delay);
+                delay += gameState.enginesMinigameState.highlightDuration + gameState.enginesMinigameState.pauseBetweenHighlights;
+            });
+
+            setTimeout(() => {
+                ui.enginesMinigameStatus.textContent = 'Ripeti la sequenza cliccando i bulloni!';
+                ui.engineSchematicArea.querySelectorAll('.engine-bolt').forEach(bolt => bolt.style.pointerEvents = 'auto');
+            }, delay);
+
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="engines"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function generateEnginesBoltSequence() {
+            gameState.enginesMinigameState.sequence = [];
+            const availableBolts = [...gameState.enginesMinigameState.bolts];
+            for (let i = 0; i < gameState.enginesMinigameState.sequenceLength; i++) {
+                if (availableBolts.length === 0) break;
+                const randomIndex = Math.floor(Math.random() * availableBolts.length);
+                gameState.enginesMinigameState.sequence.push(availableBolts[randomIndex]);
+            }
+        }
+
+        function handleBoltClick(event) {
+            if (!gameState.enginesMinigameState.active) return;
+            const clickedBoltId = event.target.dataset.boltid;
+            if (!clickedBoltId || !event.target.classList.contains('engine-bolt')) return;
+
+            gameState.enginesMinigameState.playerSequence.push(clickedBoltId);
+
+            event.target.style.backgroundColor = '#76ff03';
+            event.target.style.transform = 'rotate(15deg)';
+
+            ui.enginesMinigameStatus.textContent = `Bullone ${clickedBoltId} serrato. Rimanenti: ${gameState.enginesMinigameState.sequence.length - gameState.enginesMinigameState.playerSequence.length}`;
+
+            if (gameState.enginesMinigameState.playerSequence.length === gameState.enginesMinigameState.sequence.length) {
+                checkEnginesSequence();
+            }
+        }
+
+        function checkEnginesSequence() {
+            let correct = true;
+            for (let i = 0; i < gameState.enginesMinigameState.sequence.length; i++) {
+                if (gameState.enginesMinigameState.sequence[i] !== gameState.enginesMinigameState.playerSequence[i]) {
+                    correct = false;
+                    break;
+                }
+            }
+
+            if (correct) {
+                ui.enginesMinigameStatus.textContent = 'Sequenza di serraggio corretta! Motori installati.';
+                completeEnginesMinigame(true);
+            } else {
+                ui.enginesMinigameStatus.textContent = 'Errore nella sequenza! Riprova il minigioco.';
+                gameState.shipQuality -= 1;
+                ui.engineSchematicArea.querySelectorAll('.engine-bolt').forEach(bolt => {
+                   bolt.style.backgroundColor = 'gray';
+                   bolt.style.transform = 'rotate(0deg) scale(1)';
+                });
+                setTimeout(() => {
+                    startEnginesMinigame();
+                }, 2000);
+            }
+            updateUI();
+        }
+
+        function completeEnginesMinigame(success) {
+            gameState.enginesMinigameState.active = false;
+            ui.enginesMinigameArea.style.display = 'none';
+            ui.engineSchematicArea.querySelectorAll('.engine-bolt').forEach(bolt => {
+               bolt.style.backgroundColor = 'gray';
+               bolt.style.transform = 'rotate(0deg) scale(1)';
+            });
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="engines"]');
+
+            if (success) {
+                gameState.shipQuality += 4;
+                ui.outfittingFeedback.textContent = "Mini-gioco Installazione Motori completato! Qualità migliorata.";
+                ui.outfittingFeedback.style.color = COLORS.success;
+                ui.outfittingFeedback.style.display = 'block';
+
+                const task = gameState.phases.outfitting.tasks.engines;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Installazione Motori dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 5;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'engines', taskButton, statusElement), ui.outfittingFeedback, true);
+            } else {
+                ui.outfittingFeedback.textContent = "Mini-gioco Installazione Motori non completato. Puoi riprovare.";
+                ui.outfittingFeedback.style.color = COLORS.warning;
+                ui.outfittingFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END ENGINES MINIGAME LOGIC ---
+
+        // --- FURNISHING MINIGAME LOGIC ---
+        function startFurnishingMinigame() {
+            gameState.furnishingMinigameState.active = true;
+            gameState.furnishingMinigameState.piecesInPlace = 0;
+            ui.furnishingMinigameArea.style.display = 'block';
+            ui.furnishingMinigameStatus.textContent = 'Trascina i mobili nelle loro aree corrette.';
+
+            ui.furniturePiecesArea.querySelectorAll('.draggable-furniture').forEach(piece => {
+                piece.style.opacity = '1';
+                piece.draggable = true;
+                if (piece.parentElement !== ui.furniturePiecesArea) {
+                    ui.furniturePiecesArea.appendChild(piece);
+                }
+            });
+            ui.roomLayoutArea.querySelectorAll('.furniture-drop-zone').forEach(zone => {
+                zone.innerHTML = '';
+                zone.style.backgroundColor = 'rgba(161, 136, 127, 0.2)';
+            });
+
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="furnishing"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        // Reusing handleDragStart and handleDragOver from Assemble Block 1 minigame
+
+        function handleDropFurnishing(event) {
+            if (!gameState.furnishingMinigameState.active) return;
+            event.preventDefault();
+            const pieceId = event.dataTransfer.getData('text/plain');
+            const pieceElement = ui.furniturePiecesArea.querySelector(`.draggable-furniture[data-pieceid="${pieceId}"]`) ||
+                                 ui.roomLayoutArea.querySelector(`.draggable-furniture[data-pieceid="${pieceId}"]`);
+            const zoneElement = event.target.closest('.furniture-drop-zone');
+
+            if (pieceElement && zoneElement) {
+                const zoneId = zoneElement.dataset.zoneid;
+                if (gameState.furnishingMinigameState.correctPlacements[pieceId] === zoneId &&
+                    (zoneElement.children.length === 0 || zoneElement.contains(pieceElement))) {
+
+                    if (zoneElement.children.length === 0) {
+                       gameState.furnishingMinigameState.piecesInPlace++;
+                    }
+                    zoneElement.appendChild(pieceElement);
+                    pieceElement.style.opacity = '1';
+                    pieceElement.draggable = false;
+                    zoneElement.style.backgroundColor = 'rgba(102, 187, 106, 0.5)';
+                    ui.furnishingMinigameStatus.textContent = `Mobile ${pieceId.replace('f-','')} posizionato!`;
+
+                    if (gameState.furnishingMinigameState.piecesInPlace === gameState.furnishingMinigameState.totalPieces) {
+                        completeFurnishingMinigame(true);
+                    }
+                } else {
+                    ui.furnishingMinigameStatus.textContent = 'Posizione errata o tipo di mobile non corretto per questa zona!';
+                    if(pieceElement.parentElement !== ui.furniturePiecesArea){
+                        ui.furniturePiecesArea.appendChild(pieceElement);
+                    }
+                    pieceElement.style.opacity = '1';
+                }
+            } else if (pieceElement) {
+                if(pieceElement.parentElement !== ui.furniturePiecesArea){
+                    ui.furniturePiecesArea.appendChild(pieceElement);
+                }
+                pieceElement.style.opacity = '1';
+            }
+        }
+
+        function completeFurnishingMinigame(success) {
+            gameState.furnishingMinigameState.active = false;
+            ui.furnishingMinigameArea.style.display = 'none';
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="furnishing"]');
+
+            if (success) {
+                gameState.shipQuality += 1;
+                ui.outfittingFeedback.textContent = "Mini-gioco Arredamento completato!";
+                ui.outfittingFeedback.style.color = COLORS.success;
+                ui.outfittingFeedback.style.display = 'block';
+
+                const task = gameState.phases.outfitting.tasks.furnishing;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Arredamenti dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 2;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'furnishing', taskButton, statusElement), ui.outfittingFeedback, true);
+            } else {
+                ui.outfittingFeedback.textContent = "Mini-gioco Arredamento non completato. Puoi riprovare.";
+                ui.outfittingFeedback.style.color = COLORS.warning;
+                ui.outfittingFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END FURNISHING MINIGAME LOGIC ---
+
+        // --- COMBAT SYSTEMS MINIGAME LOGIC ---
+        function startCombatSystemsMinigame() {
+            gameState.combatSystemsMinigameState.active = true;
+            gameState.combatSystemsMinigameState.score = 0;
+            gameState.combatSystemsMinigameState.timeLeft = 30;
+
+            ui.combatScoreDisplay.textContent = gameState.combatSystemsMinigameState.score;
+            ui.combatTargetGoalDisplay.textContent = gameState.combatSystemsMinigameState.targetGoal;
+            ui.combatTimeLeftDisplay.textContent = gameState.combatSystemsMinigameState.timeLeft;
+            ui.radarScreen.innerHTML = '';
+            ui.combatSystemsMinigameArea.style.display = 'block';
+            ui.combatSystemsMinigameStatus.style.color = 'white';
+            ui.resetCombatSystemsMinigameBtn.disabled = true;
+
+            gameState.combatSystemsMinigameState.targetIntervalId = setInterval(
+                spawnCombatTarget,
+                gameState.combatSystemsMinigameState.targetSpawnRate
+            );
+
+            gameState.combatSystemsMinigameState.gameTimerId = setInterval(() => {
+                gameState.combatSystemsMinigameState.timeLeft--;
+                ui.combatTimeLeftDisplay.textContent = gameState.combatSystemsMinigameState.timeLeft;
+                if (gameState.combatSystemsMinigameState.timeLeft <= 0) {
+                    endCombatSystemsRound(false);
+                }
+            }, 1000);
+
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="combat_systems"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function spawnCombatTarget() {
+            if (!gameState.combatSystemsMinigameState.active) return;
+
+            const target = document.createElement('div');
+            target.classList.add('combat-target');
+            target.style.position = 'absolute';
+            target.style.width = '20px';
+            target.style.height = '20px';
+            target.style.backgroundColor = 'red';
+            target.style.borderRadius = '50%';
+            target.style.cursor = 'crosshair';
+
+            const radarWidth = ui.radarScreen.offsetWidth;
+            const radarHeight = ui.radarScreen.offsetHeight;
+            target.style.left = `${Math.random() * (radarWidth - 20)}px`;
+            target.style.top = `${Math.random() * (radarHeight - 20)}px`;
+
+            target.addEventListener('click', handleCombatTargetClick);
+            ui.radarScreen.appendChild(target);
+
+            setTimeout(() => {
+                if (target.parentElement) {
+                    target.remove();
+                }
+            }, gameState.combatSystemsMinigameState.targetLife);
+        }
+
+        function handleCombatTargetClick(event) {
+            if (!gameState.combatSystemsMinigameState.active) return;
+
+            event.target.remove();
+            gameState.combatSystemsMinigameState.score++;
+            ui.combatScoreDisplay.textContent = gameState.combatSystemsMinigameState.score;
+
+            if (gameState.combatSystemsMinigameState.score >= gameState.combatSystemsMinigameState.targetGoal) {
+                endCombatSystemsRound(true);
+            }
+        }
+
+        function endCombatSystemsRound(success) {
+            if (ui.combatSystemsMinigameArea.style.display === 'none' && !gameState.combatSystemsMinigameState.active) {
+                 // Already cleaned up and exited (e.g. by reset button after timer already fired but before this timeout)
+                return;
+            }
+
+            gameState.combatSystemsMinigameState.active = false;
+            clearInterval(gameState.combatSystemsMinigameState.targetIntervalId);
+            clearInterval(gameState.combatSystemsMinigameState.gameTimerId);
+            gameState.combatSystemsMinigameState.targetIntervalId = null; // Clear IDs
+            gameState.combatSystemsMinigameState.gameTimerId = null;
+            ui.resetCombatSystemsMinigameBtn.disabled = false;
+
+            if (success) {
+                ui.combatSystemsMinigameStatus.textContent = 'Obiettivo raggiunto! Sistemi calibrati.';
+                ui.combatSystemsMinigameStatus.style.color = 'lightgreen';
+                setTimeout(() => completeCombatSystemsMinigame(true), 1000);
+            } else {
+                ui.combatSystemsMinigameStatus.textContent = `Obiettivo NON raggiunto! Punteggio: ${gameState.combatSystemsMinigameState.score}. Riprova.`;
+                ui.combatSystemsMinigameStatus.style.color = 'salmon';
+            }
+        }
+
+        function completeCombatSystemsMinigame(success) {
+            gameState.combatSystemsMinigameState.active = false;
+            clearInterval(gameState.combatSystemsMinigameState.targetIntervalId);
+            clearInterval(gameState.combatSystemsMinigameState.gameTimerId);
+            gameState.combatSystemsMinigameState.targetIntervalId = null;
+            gameState.combatSystemsMinigameState.gameTimerId = null;
+
+            ui.combatSystemsMinigameArea.style.display = 'none';
+            const taskButton = ui.outfittingTasksUI.querySelector('.task-btn[data-task="combat_systems"]');
+
+            if (success) {
+                gameState.shipQuality += 5;
+                ui.outfittingFeedback.textContent = "Mini-gioco Sistemi di Combattimento completato! Qualità notevolmente migliorata.";
+                ui.outfittingFeedback.style.color = COLORS.success;
+                ui.outfittingFeedback.style.display = 'block';
+
+                const task = gameState.phases.outfitting.tasks.combat_systems;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Sistemi di Combattimento dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 10;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'combat_systems', taskButton, statusElement), ui.outfittingFeedback, true);
+            } else {
+                ui.outfittingFeedback.textContent = "Mini-gioco Sistemi di Combattimento non superato. Il compito principale non è avviato.";
+                ui.outfittingFeedback.style.color = COLORS.error;
+                ui.outfittingFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END COMBAT SYSTEMS MINIGAME LOGIC ---
+
+        // --- PROPULSION TRIAL MINIGAME LOGIC ---
+        function startPropulsionTrialMinigame() {
+            const state = gameState.propulsionTrialMinigameState;
+            state.active = true;
+            state.score = 0;
+            state.timeLeft = 20;
+            state.markerPos = 10;
+            state.targetPos = 40;
+            state.targetDirection = 1;
+
+            ui.propulsionScoreDisplay.textContent = state.score;
+            ui.propulsionGoalDisplay.textContent = state.goal;
+            ui.propulsionTrialTimerDisplay.textContent = state.timeLeft;
+            ui.propulsionPlayerMarker.style.bottom = `${state.markerPos}%`;
+            ui.propulsionTargetZone.style.bottom = `${state.targetPos}%`;
+
+            ui.propulsionTrialMinigameArea.style.display = 'block';
+            ui.resetPropulsionTrialBtn.disabled = true;
+            ui.propulsionTrialStatus.textContent = 'Mantieni la velocità nella zona verde!';
+
+
+            state.gameLoopId = setInterval(propulsionGameTick, 100);
+
+            state.timerId = setInterval(() => {
+                state.timeLeft--;
+                ui.propulsionTrialTimerDisplay.textContent = state.timeLeft;
+                if (state.timeLeft <= 0) {
+                    endPropulsionTrial(state.score >= state.goal);
+                }
+            }, 1000);
+
+            const taskButton = ui.trialTasksUI.querySelector('.task-btn[data-task="propulsion_trial"]');
+            if (taskButton) taskButton.disabled = true;
+        }
+
+        function propulsionGameTick() {
+            const state = gameState.propulsionTrialMinigameState;
+            if (!state.active) return;
+
+            state.targetPos += state.targetSpeed * state.targetDirection;
+
+            if (state.targetPos + state.targetHeight > 100) {
+                state.targetPos = 100 - state.targetHeight;
+                state.targetDirection = -1;
+            } else if (state.targetPos < 0) {
+                state.targetPos = 0;
+                state.targetDirection = 1;
+            }
+            ui.propulsionTargetZone.style.bottom = `${state.targetPos}%`;
+
+            const playerMarkerBottom = state.markerPos;
+            const playerMarkerTop = state.markerPos + 4; // Marker height is 4%
+
+            const targetZoneBottom = state.targetPos;
+            const targetZoneTop = state.targetPos + state.targetHeight;
+
+            if (playerMarkerTop > targetZoneBottom && playerMarkerBottom < targetZoneTop) {
+                state.score += 2;
+                ui.propulsionPlayerMarker.style.backgroundColor = 'green';
+            } else {
+                state.score -= 1;
+                if (state.score < 0) state.score = 0;
+                ui.propulsionPlayerMarker.style.backgroundColor = 'blue';
+            }
+            ui.propulsionScoreDisplay.textContent = state.score;
+
+            if (state.score >= state.goal && state.timeLeft > 0) { // Check timeleft to prevent win after timer ends
+                // endPropulsionTrial(true); // Let timer handle final win to ensure full duration if desired, or score goal is enough
+            }
+        }
+
+        function updatePlayerThrottle(change) {
+            const state = gameState.propulsionTrialMinigameState;
+            if (!state.active) return;
+            state.markerPos += change;
+            if (state.markerPos < state.minMarkerPos) state.markerPos = state.minMarkerPos;
+            if (state.markerPos > state.maxMarkerPos) state.markerPos = state.maxMarkerPos;
+            ui.propulsionPlayerMarker.style.bottom = `${state.markerPos}%`;
+        }
+
+        function endPropulsionTrial(successOutcome) { // Parameter indicates if goal was met
+            const state = gameState.propulsionTrialMinigameState;
+            // Check if already ended (e.g. by reset button)
+            if (!state.active && ui.propulsionTrialMinigameArea.style.display === 'none') {
+                 return;
+            }
+
+            state.active = false;
+            clearInterval(state.gameLoopId);
+            clearInterval(state.timerId);
+            state.gameLoopId = null;
+            state.timerId = null;
+            ui.resetPropulsionTrialBtn.disabled = false;
+            ui.propulsionPlayerMarker.style.backgroundColor = 'blue';
+
+            if (successOutcome && state.score >= state.goal) { // Double check score if successOutcome is true
+                ui.propulsionTrialStatus.textContent = 'Test di propulsione superato!';
+                setTimeout(() => completePropulsionTrialMinigame(true), 1000);
+            } else {
+                ui.propulsionTrialStatus.textContent = `Test fallito! Punteggio: ${state.score}. Riprova.`;
+                // No automatic call to complete(false), allow reset.
+            }
+        }
+
+        function completePropulsionTrialMinigame(success) {
+            gameState.propulsionTrialMinigameState.active = false;
+            clearInterval(gameState.propulsionTrialMinigameState.gameLoopId);
+            clearInterval(gameState.propulsionTrialMinigameState.timerId);
+            gameState.propulsionTrialMinigameState.gameLoopId = null;
+            gameState.propulsionTrialMinigameState.timerId = null;
+            ui.propulsionTrialMinigameArea.style.display = 'none';
+            const taskButton = ui.trialTasksUI.querySelector('.task-btn[data-task="propulsion_trial"]');
+
+            if (success) {
+                gameState.shipQuality += 3;
+                ui.trialsFeedback.textContent = "Mini-gioco Test Propulsione superato! Prestazioni motore ottimali.";
+                ui.trialsFeedback.style.color = COLORS.success;
+                ui.trialsFeedback.style.display = 'block';
+
+                const task = gameState.phases.trials.tasks.propulsion_trial;
+                const statusElement = taskButton ? taskButton.nextElementSibling : null;
+                if (gameState.budget < task.cost) {
+                    alert("Budget insufficiente per Test Propulsione dopo il minigioco!");
+                    if(taskButton) taskButton.disabled = false;
+                    updateUI();
+                    return;
+                }
+                gameState.budget -= task.cost;
+                const actualDuration = task.baseDuration + Math.floor(Math.random() * task.variance) - Math.floor(task.variance / 2) - 1;
+                task.currentDuration = Math.max(1, actualDuration);
+                startTask(task.name, task.currentDuration, () => taskCompletionCallback(task, 'propulsion_trial', taskButton, statusElement), ui.trialsFeedback, true);
+            } else {
+                ui.trialsFeedback.textContent = "Mini-gioco Test Propulsione fallito. Riprovare per calibrare i motori.";
+                ui.trialsFeedback.style.color = COLORS.error;
+                ui.trialsFeedback.style.display = 'block';
+                if(taskButton) taskButton.disabled = false;
+            }
+            updateUI();
+        }
+        // --- END PROPULSION TRIAL MINIGAME LOGIC ---
 
         function startTask(taskName, duration, onCompleteCallback, feedbackEl, isTimePassingTask = false) {
             if (gameState.activeTask && gameState.activeTask !== "Mini-Gioco Sagomatura") { // Allow minigame to interrupt other thoughts
@@ -1124,6 +2898,22 @@
             // ui.tabs.forEach(t => t.disabled = true); // Optionally disable tab switching
 
             if (isTimePassingTask) {
+                let dynamicIntervalMs;
+                const MIN_INTERVAL_MS = 40; // Minimum interval per game day tick (e.g., 25 updates/sec max)
+                const TARGET_REAL_TIME_MS = 5000; // Target real time for task completion
+
+                if (duration > 0) {
+                    dynamicIntervalMs = TARGET_REAL_TIME_MS / duration;
+                    if (dynamicIntervalMs < MIN_INTERVAL_MS) {
+                        dynamicIntervalMs = MIN_INTERVAL_MS;
+                        // If the task is very long (e.g., duration > 125 days),
+                        // it will take longer than 5 seconds (125 * 40ms = 5000ms).
+                        // Example: 200 days * 40ms/day = 8000ms = 8 seconds. This is acceptable.
+                    }
+                } else {
+                    dynamicIntervalMs = 400; // Fallback for tasks with no duration or 0 duration
+                }
+
                 let taskInterval = setInterval(() => {
                     if (!gameState.gameActive || gameState.activeTask !== taskName) { // Task changed or game ended
                         clearInterval(taskInterval);
@@ -1165,7 +2955,7 @@
                         updateUI(); 
                         checkGameOverConditions();
                     }
-                }, 700); // Adjusted speed
+                }, dynamicIntervalMs);
             } else { // For tasks that don't pass time themselves (like minigame setup)
                  // The onCompleteCallback will be called by the minigame logic
             }
@@ -1284,6 +3074,109 @@
         ui.restartGameBtn.addEventListener('click', () => {
             ui.gameOverModal.style.display = 'none';
             initGame();
+        });
+
+        ui.electricalWiresClickable.querySelectorAll('.wire-btn').forEach(btn => {
+            btn.addEventListener('click', handleWireClick);
+        });
+
+        // Drag and Drop for Assemble Block 1
+        ui.block1ComponentsArea.querySelectorAll('.draggable-piece').forEach(piece => {
+            piece.addEventListener('dragstart', handleDragStart);
+        });
+        // Need to re-query draggable pieces if they are moved to puzzle area and game is reset
+        // So, event delegation on parent might be better, or re-attach listeners in startAssembleBlock1Minigame.
+        // For now, this setup works for initial drag. If pieces are returned to component area, they'll keep listeners.
+
+        ui.block1PuzzleArea.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', handleDragOver);
+            zone.addEventListener('drop', handleDrop);
+        });
+        ui.resetBlock1MinigameBtn.addEventListener('click', () => {
+            startAssembleBlock1Minigame();
+        });
+
+        // Drag and Drop for Assemble Block 2
+        ui.block2ComponentsArea.querySelectorAll('.draggable-piece-b2').forEach(piece => {
+            piece.addEventListener('dragstart', handleDragStart);
+        });
+        ui.block2PuzzleArea.querySelectorAll('.drop-zone-b2').forEach(zone => {
+            zone.addEventListener('dragover', handleDragOver);
+            zone.addEventListener('drop', handleDropBlock2);
+        });
+        ui.resetBlock2MinigameBtn.addEventListener('click', () => {
+            startAssembleBlock2Minigame();
+        });
+
+        // Event Listeners for Flip Blocks Minigame
+        ui.flipBlocksControls.querySelectorAll('.crane-btn').forEach(btn => {
+            btn.addEventListener('click', handleCraneClick);
+        });
+        ui.resetFlipBlocksMinigameBtn.addEventListener('click', () => {
+            startFlipBlocksMinigame();
+        });
+
+        // Event Listeners for Assemble Prua Minigame
+        ui.pruaSchematicArea.querySelectorAll('.weld-point').forEach(wp => {
+            wp.addEventListener('click', handleWeldPointClick);
+        });
+        ui.resetPruaMinigameBtn.addEventListener('click', () => {
+            startAssemblePruaMinigame();
+        });
+
+        // Event Listeners for Assemble Poppa Minigame
+        ui.poppaSchematicArea.querySelectorAll('.weld-point-poppa').forEach(wp => {
+            wp.addEventListener('click', handleWeldPointClickPoppa);
+        });
+        ui.resetPoppaMinigameBtn.addEventListener('click', () => {
+            startAssemblePoppaMinigame();
+        });
+
+        // Event Listener for HVAC Minigame Reset
+        ui.resetHvacMinigameBtn.addEventListener('click', () => {
+            startHvacMinigame();
+        });
+
+        // Event Listeners for Engines Minigame
+        ui.engineSchematicArea.querySelectorAll('.engine-bolt').forEach(bolt => {
+            bolt.addEventListener('click', handleBoltClick);
+        });
+        ui.resetEnginesMinigameBtn.addEventListener('click', () => {
+            startEnginesMinigame();
+        });
+
+        // Drag and Drop for Furnishing Minigame
+        ui.furniturePiecesArea.querySelectorAll('.draggable-furniture').forEach(piece => {
+            piece.addEventListener('dragstart', handleDragStart);
+        });
+        ui.roomLayoutArea.querySelectorAll('.furniture-drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', handleDragOver);
+            zone.addEventListener('drop', handleDropFurnishing);
+        });
+        ui.resetFurnishingMinigameBtn.addEventListener('click', () => {
+            startFurnishingMinigame();
+        });
+
+        // Event Listener for Combat Systems Minigame Reset
+        ui.resetCombatSystemsMinigameBtn.addEventListener('click', () => {
+            clearInterval(gameState.combatSystemsMinigameState.targetIntervalId);
+            clearInterval(gameState.combatSystemsMinigameState.gameTimerId);
+            gameState.combatSystemsMinigameState.targetIntervalId = null;
+            gameState.combatSystemsMinigameState.gameTimerId = null;
+            gameState.combatSystemsMinigameState.active = false;
+            startCombatSystemsMinigame();
+        });
+
+        // Event Listeners for Propulsion Trial Minigame
+        ui.increaseThrottleBtn.addEventListener('click', () => updatePlayerThrottle(gameState.propulsionTrialMinigameState.markerSpeed));
+        ui.decreaseThrottleBtn.addEventListener('click', () => updatePlayerThrottle(-gameState.propulsionTrialMinigameState.markerSpeed));
+        ui.resetPropulsionTrialBtn.addEventListener('click', () => {
+            clearInterval(gameState.propulsionTrialMinigameState.gameLoopId);
+            clearInterval(gameState.propulsionTrialMinigameState.timerId);
+            gameState.propulsionTrialMinigameState.gameLoopId = null;
+            gameState.propulsionTrialMinigameState.timerId = null;
+            gameState.propulsionTrialMinigameState.active = false;
+            startPropulsionTrialMinigame();
         });
 
         // Initial call
